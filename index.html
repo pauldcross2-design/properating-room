@@ -38,20 +38,21 @@ header.top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;ma
 .kasper h3{margin:0 0 10px;color:#5b2d82}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
-.chip-gold{background:rgba(232,213,163,.14);color:var(--goldhi)}
-.chip-pine{background:rgba(125,154,120,.16);color:var(--pine)}
-.chip-brick{background:rgba(193,122,108,.16);color:var(--brick)}
-.chip-mute{background:rgba(228,224,212,.08);color:var(--mute)}
-.chip-amber{background:rgba(212,165,116,.16);color:var(--amber)}
+.chip-gold{background:rgba(232,213,163,.35);color:#6e5a32}
+.chip-pine{background:rgba(125,154,120,.16);color:#3d5a3a}
+.chip-brick{background:rgba(193,122,108,.16);color:#8a3f34}
+.chip-mute{background:#efe9dc;color:#7a7568}
+.chip-amber{background:rgba(212,165,116,.22);color:#7a4e1c}
 .grid{display:grid;gap:10px}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g2{grid-template-columns:repeat(2,1fr)}
 table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden}
 th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7a7568;font-weight:500;padding:8px;border-bottom:1px solid #e8e0d4}
-td{padding:9px 8px;border-bottom:1px solid #f0eadf}
+td{padding:9px 8px;border-bottom:1px solid #f0eadf;vertical-align:middle}
 .name-btn{background:none;border:0;padding:0;color:#5b2d82;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
 .heat{display:inline-block;min-width:48px;text-align:center;border-radius:6px;padding:2px 6px;font-weight:600;font-size:12px}
 .h-g{background:#7d9a78;color:#fff}.h-y{background:#c4a574;color:#1c1408}.h-o{background:#d9894a;color:#fff}.h-r{background:#c17a6c;color:#fff}
+.empty{color:#7a7568;padding:22px 8px;text-align:center}
 .modal-back{position:fixed;inset:0;background:rgba(26,20,48,.55);z-index:40;display:flex;align-items:center;justify-content:center;padding:20px}
 .hidden{display:none!important}
 .player-card{width:min(560px,100%);max-height:88vh;overflow:auto;background:#f4efe4;border-radius:16px;border:1px solid #d9d0c0;padding:18px}
@@ -64,8 +65,8 @@ td{padding:9px 8px;border-bottom:1px solid #f0eadf}
 <body>
 <div class="shell"><div class="wrap">
   <header class="top">
-    <div class="brand"><h1>The Properating Room</h1><p>Consensus factory · live slate · no invented names · A+ stays isolated</p></div>
-    <div class="meta"><div>Slate <b>Mon 9/21</b></div><div>As of <b>6:20 PM CT</b></div><div>Pages <b>direct HTML</b></div></div>
+    <div class="brand"><h1>The Properating Room</h1><p>Consensus factory · morning rewind · no invented names · A+ stays isolated</p></div>
+    <div class="meta"><div>Slate <b>Mon 9/21</b></div><div>As of <b>9:00 AM CT</b></div><div>Persist <b>9am-hold</b></div></div>
   </header>
   <nav class="sports" id="sports"></nav>
 </div></div>
@@ -81,34 +82,54 @@ const NFL=c=>`https://a.espncdn.com/i/teamlogos/nfl/500/${c}.png`;
 const TEAMS={TOR:141,BAL:110,WSH:120,DET:116,MIN:142,SF:137};
 const STATE={sport:"mlb",tab:"consensus"};
 const TABS={
-  mlb:[["consensus","Consensus"],["matchups","Matchups"],["games","Game Board"],["parlay","Parlay Card"],["cappers","Cappers"]],
+  mlb:[["consensus","Consensus"],["matchups","Matchups"],["games","Game Board"],["parlay","Parlay Card"],["cappers","Cappers"],["data","Data"]],
   nba:[["tickets","Tickets"]],
-  nfl:[["laser","Laser"],["week3","Week 3"]],
+  nfl:[["laser","Laser"],["mnf","Monday Night"],["week3","Week 3"]],
   survivor:[["board","Board"],["chalk","Chalk"],["path","Path"]]
 };
-const PLAYERS=[
-  {last:"Eldridge",player:"Bryce Eldridge",team:"SF",game:"MIN@SF",src:3,sources:"Payoff · Barry · Venom",venom:"#7 · 64.8",kasper:"#3 stored",note:"Gold-row. SF lineup unposted.",flag:"OPEN"},
-  {last:"Alonso",player:"Pete Alonso",team:"BAL",game:"TOR@BAL",src:3,sources:"Payoff · Venom · Kasper",venom:"#1 · 77.1",kasper:"#1 source",note:"Homer #1 + Kasper #1. Game live/delayed.",flag:"LIVE"},
-  {last:"Torkelson",player:"Spencer Torkelson",team:"DET",game:"WSH@DET",src:3,sources:"Barry · Venom · Kasper",venom:"#19 · 53.6",kasper:"#2 source",note:"Barry + Homer #19 + Kasper #2.",flag:"LIVE"},
-  {last:"Mayo",player:"Coby Mayo",team:"BAL",game:"TOR@BAL",src:2,sources:"Payoff · Venom",venom:"#2 · 71.4",kasper:"—",note:"Homer #2. Payoff dash.",flag:"LIVE"},
-  {last:"Rodriguez",player:"Emmanuel Rodriguez",team:"MIN",game:"MIN@SF",src:2,sources:"Venom VALUE · Kasper",venom:"#81 VALUE · 74.7",kasper:"#2 source",note:"Homer VALUE #81 + Kasper #2. Posted 8-hole.",flag:"OPEN"},
-  {last:"Basallo",player:"Samuel Basallo",team:"BAL",game:"TOR@BAL",src:2,sources:"Barry · HRK",venom:"OVER #14",kasper:"—",note:"Homer #14 OVER — Venom dropped. Typed Barry + HRK still count.",flag:"LIVE"},
-  {last:"Clemens",player:"Kody Clemens",team:"MIN",game:"MIN@SF",src:2,sources:"Payoff · HRK",venom:"OVER #42",kasper:"—",note:"4-hole. Two typed tickets. Homer OVER — Venom does not credit.",flag:"OPEN"},
-  {last:"Okamoto",player:"Kazuma Okamoto",team:"TOR",game:"TOR@BAL",src:1,sources:"Payoff",venom:"#3 · 67.0",kasper:"—",note:"Homer #3. CROWD last-name book.",flag:"LIVE"},
-  {last:"Lile",player:"Daylen Lile",team:"WSH",game:"WSH@DET",src:1,sources:"Payoff",venom:"#5 · 58.8",kasper:"—",note:"Homer #5.",flag:"LIVE"},
-  {last:"Greene",player:"Riley Greene",team:"DET",game:"WSH@DET",src:1,sources:"Payoff",venom:"#8 · 56.9",kasper:"—",note:"Homer #8.",flag:"LIVE"},
-  {last:"Torres",player:"Gleyber Torres",team:"DET",game:"WSH@DET",src:2,sources:"Barry · Kasper",venom:"#61 not credited",kasper:"#1 source",note:"Barry + Kasper #1.",flag:"LIVE"},
-  {last:"Hill",player:"Turner Hill",team:"SF",game:"MIN@SF",src:1,sources:"Kasper",venom:"—",kasper:"#1 source",note:"Kasper #1 MIN@SF. Lineup unposted.",flag:"OPEN"},
-  {last:"Valencia",player:"Eduardo Valencia",team:"DET",game:"WSH@DET",src:1,sources:"Venom",venom:"#4 + Viper #1",kasper:"—",note:"18-game drought · 9.1% brl. Still one Venom source.",flag:"LIVE"},
-  {last:"Cowser",player:"Colton Cowser",team:"BAL",game:"TOR@BAL",src:1,sources:"Venom",venom:"#15 VALUE + Viper #2",kasper:"—",note:"15 games no HR · 0.0% brl. Fold only.",flag:"LIVE"},
-  {last:"Ortiz",player:"Abimelec Ortiz",team:"WSH",game:"WSH@DET",src:1,sources:"Venom",venom:"Viper #3",kasper:"—",note:"27-game drought. Viper #3 new credit.",flag:"LIVE"},
-  {last:"Guerrero",player:"Vladimir Guerrero Jr.",team:"TOR",game:"TOR@BAL",src:1,sources:"Kasper",venom:"—",kasper:"#2 SIT",note:"Kasper #2. Not in posted TOR 1-9. SIT.",flag:"SIT"}
+const GAMES=[
+  {game:"TOR@BAL",away:"TOR",home:"BAL",et:"6:35 ET",sp:"Yesavage RHP vs Baz RHP",note:"Camden · rain chance 69° · wind 9 NE · HR weather Poor · TOR 77-80 BAL 76-81"},
+  {game:"WSH@DET",away:"WSH",home:"DET",et:"6:40 ET",sp:"Herz LHP vs Ryan RHP",note:"Comerica · cloudy 61° · wind 13 NE · HR weather Poor · WSH 73-84 DET 74-83"},
+  {game:"MIN@SF",away:"MIN",home:"SF",et:"9:45 ET",sp:"Matthews RHP vs Tidwell RHP",note:"Oracle · 61° · wind 9 WSW · Tidwell 2.14 HR/9 vs LHB / 0.33 vs RHB · MIN 73-83 SF 64-92"}
 ];
-function heat(n){return n>=3?"h-g":n===2?"h-y":n===1?"h-o":"h-r"}
+const PLAYERS=[
+  {last:"Eldridge",player:"Bryce Eldridge",team:"SF",game:"MIN@SF",src:2,sources:"Payoff · Barry",payoff:"+599",barry:"Moderate · wrote vs Ober (probable Matthews)",flag:"OPEN",note:"Only 2-src name with Basallo at 9 AM. Lineup unposted. Not gold-row — hold is on."},
+  {last:"Basallo",player:"Samuel Basallo",team:"BAL",game:"TOR@BAL",src:2,sources:"Payoff · Barry",payoff:"+641 pivot",barry:"Clean vs Yesavage (spelled Bassallo)",flag:"PIVOT",note:"Payoff pivot + Barry juice. Two typed sources. Lineup unposted."},
+  {last:"Alonso",player:"Pete Alonso",team:"BAL",game:"TOR@BAL",src:1,sources:"Payoff",payoff:"+339",barry:"—",flag:"OPEN",note:"Payoff best bat TOR@BAL. Also on HRK dump tape — dump is not a second source."},
+  {last:"Mayo",player:"Coby Mayo",team:"BAL",game:"TOR@BAL",src:1,sources:"Payoff",payoff:"+374",barry:"—",flag:"OPEN",note:"Payoff typed. HRK dump tape only after that."},
+  {last:"Okamoto",player:"Kazuma Okamoto",team:"TOR",game:"TOR@BAL",src:1,sources:"Payoff",payoff:"+365",barry:"—",flag:"OPEN",note:"Payoff typed."},
+  {last:"Smith",player:"Josh Smith",team:"TOR",game:"TOR@BAL",src:1,sources:"Payoff",payoff:"+700 longshot",barry:"—",flag:"MOON",note:"Payoff longshot. Do not grade moons."},
+  {last:"Lile",player:"Daylen Lile",team:"WSH",game:"WSH@DET",src:1,sources:"Payoff",payoff:"+549",barry:"—",flag:"OPEN",note:"Payoff typed. On his value pairings with Eldridge / Bericoto."},
+  {last:"Greene",player:"Riley Greene",team:"DET",game:"WSH@DET",src:1,sources:"Payoff",payoff:"+502",barry:"—",flag:"OPEN",note:"Payoff typed. Also on HRK dump tape."},
+  {last:"Lee",player:"Hao-Yu Lee",team:"DET",game:"WSH@DET",src:1,sources:"Payoff",payoff:"+658 longshot",barry:"—",flag:"MOON",note:"Payoff longshot. Do not grade moons."},
+  {last:"Chaparro",player:"Andrés Chaparro",team:"WSH",game:"WSH@DET",src:1,sources:"Payoff",payoff:"+465 pivot",barry:"—",flag:"PIVOT",note:"Payoff pivot. Do not grade pivots as locks."},
+  {last:"Clemens",player:"Kody Clemens",team:"MIN",game:"MIN@SF",src:1,sources:"Payoff",payoff:"+585",barry:"—",flag:"OPEN",note:"Payoff typed. Also on HRK dump tape."},
+  {last:"Bericoto",player:"Victor Bericoto",team:"SF",game:"MIN@SF",src:1,sources:"Payoff",payoff:"+694 longshot",barry:"—",flag:"MOON",note:"Payoff longshot."},
+  {last:"Gilbert",player:"Drew Gilbert",team:"SF",game:"MIN@SF",src:1,sources:"Payoff",payoff:"+675 pivot",barry:"—",flag:"PIVOT",note:"Payoff pivot."},
+  {last:"Valenzuela",player:"Brandon Valenzuela",team:"TOR",game:"TOR@BAL",src:1,sources:"Barry",payoff:"—",barry:"Moderate vs Baz",flag:"OPEN",note:"Barry juice only. Lineup unposted so this is not a SIT yet."},
+  {last:"Torkelson",player:"Spencer Torkelson",team:"DET",game:"WSH@DET",src:1,sources:"Barry",payoff:"—",barry:"Clean · wrote vs Kent (probable Herz)",flag:"DIRTY SP",note:"Barry juice. Pitcher tag on the graphic is Kent, not Herz."},
+  {last:"Torres",player:"Gleyber Torres",team:"DET",game:"WSH@DET",src:1,sources:"Barry",payoff:"—",barry:"Clean · wrote vs Kent (probable Herz)",flag:"DIRTY SP",note:"Barry juice. Pitcher tag on the graphic is Kent, not Herz."},
+  {last:"Bell",player:"Josh Bell",team:"MIN",game:"MIN@SF",src:1,sources:"Barry",payoff:"—",barry:"Moderate vs Tidwell",flag:"OPEN",note:"Barry juice only. Lineup unposted so this is not a SIT yet."}
+];
+const HANDLES=[
+  ["landed","6:40 AM CT","PayoffBetsMLB","Okamoto, Alonso, Mayo, Smith moon, Basallo pivot · Lile, Greene, Hao-Yu moon, Chaparro pivot · Clemens, Eldridge, Bericoto moon, Gilbert pivot"],
+  ["landed","6:53 AM CT","parlaybarry","Valenzuela, Basallo, Torkelson, Torres, Bell, Eldridge · DET/SF SP tags dirty (Kent / Ober)"],
+  ["landed","overnight","TheHome_RunKing","Dump tape: Wood, Alonso, Mayo, Clemens, Okamoto, CES, Abrams, Dingler, Greene, Eldridge · not a lock slip"],
+  ["video","2:50 AM CT","KasperMLB","9/21 slate breakdown video. 3/game card not typed by 9 AM."],
+  ["waiting","—","jakevenomapp","No 9/21 Homer / Viper / Edge post before 9 AM"],
+  ["waiting","—","SportsPredict","0 A+ · Home Runs Model unposted"],
+  ["nfl","—","rudebets","MNF breakdown only · no HR slip"],
+  ["waiting","—","bbrownDTP","No MLB HR slip by 9 AM"],
+  ["waiting","—","POTDJay","Model posts after 2:30 PM CT — after this cut"]
+];
+const PAIRS=["Value pair +4441: Lile + Eldridge","Value + moon +5054: Lile + Bericoto","Longshot duo +6249: Bericoto + Smith","Value 3-leg +35939: Lile + Eldridge + Bericoto","Hot hands +2542: Alonso + Greene"];
+const HRK=["Wood","Alonso","Mayo","Clemens","Okamoto","Encarnacion-Strand","Abrams","Dingler","Greene","Eldridge"];
+function heat(n){return n>=2?"h-y":n===1?"h-o":"h-r"}
 function logo(t){return TEAMS[t]?`<img alt="${t}" src="${MLB(TEAMS[t])}" style="width:18px;height:18px;vertical-align:middle"> `:""}
 function nameBtn(p){return `<button class="name-btn" data-player="${p.last}">${p.last}</button>`}
+function ranked(){return [...PLAYERS].sort((a,b)=>b.src-a.src||a.last.localeCompare(b.last))}
 function renderSports(){
-  const items=[["mlb","MLB","3-game slate"],["nba","NBA","LIVE OFF"],["nfl","NFL","W2 MNF NYG@LAR"],["survivor","Survivor","W2 TB died"]];
+  const items=[["mlb","MLB","3-game slate · HOLD"],["nba","NBA","LIVE OFF"],["nfl","NFL","W2 MNF NYG@LAR"],["survivor","Survivor","W2 Sunday in"]];
   sports.innerHTML=items.map(([id,lab,sub])=>`<button class="sport ${STATE.sport===id?"on":""}" data-sport="${id}">${lab}<small>${sub}</small></button>`).join("");
   sports.onclick=e=>{const b=e.target.closest("[data-sport]");if(!b)return;STATE.sport=b.dataset.sport;STATE.tab=TABS[STATE.sport][0][0];draw()};
 }
@@ -118,79 +139,100 @@ function renderTabs(){
   tabs.onclick=e=>{const b=e.target.closest("[data-tab]");if(!b)return;STATE.tab=b.dataset.tab;draw()};
 }
 function viewMLB(){
-  if(STATE.tab==="matchups") return `<div class="kasper"><h3>Matchups</h3><p class="lede">Kasper 3/game. Rank 1-2 are sources. Rank 3 stored. 0 A+.</p>
-    <table><thead><tr><th>Game</th><th>#1</th><th>#2</th><th>#3 stored</th></tr></thead><tbody>
-    <tr><td>TOR@BAL</td><td>Alonso 76.7</td><td>Guerrero 65.3 SIT</td><td>Beavers 63.6</td></tr>
-    <tr><td>WSH@DET</td><td>Torres 77.4</td><td>Torkelson 73.4</td><td>Wood 71.4</td></tr>
-    <tr><td>MIN@SF</td><td>Hill 62.9</td><td>Rodriguez 58.8</td><td>Eldridge 57.6</td></tr>
-    </tbody></table></div>`;
-  if(STATE.tab==="games") return `<div class="kasper"><h3>Game Board</h3><p class="lede">Minimum two plays per game. Vault is display only.</p>
-    <div class="grid g3">
-      <div class="card"><div class="chip chip-brick">DELAYED</div><h3>TOR @ BAL</h3><p class="why">Alonso · Mayo · Okamoto</p></div>
-      <div class="card"><div class="chip chip-brick">LIVE</div><h3>WSH @ DET</h3><p class="why">Torkelson · Torres · Lile · Greene</p></div>
-      <div class="card"><div class="chip chip-pine">PRE-GAME</div><h3>MIN @ SF</h3><p class="why">Eldridge · Rodriguez · Clemens · Hill</p></div>
-    </div></div>`;
-  if(STATE.tab==="parlay") return `<div class="kasper"><h3>Parlay Card</h3><p class="lede">Gold-row is Eldridge. Clemens stays from two typed tickets even though Homer tagged OVER.</p>
-    <div class="grid g2"><div class="card"><div class="chip chip-mute">NIGHT CORE</div><p class="why">Eldridge · Rodriguez · Clemens · Bericoto. Live leftovers only for grading.</p></div>
-    <div class="card"><div class="chip chip-mute">DO NOT COPY BLINDLY</div><p class="why">HRK already posted Basallo+Clemens+Lee and CES+Clemens+Wood.</p></div></div></div>`;
+  if(STATE.tab==="matchups") return `<div class="kasper"><h3>Matchups</h3>
+    <p class="lede">Morning slate only. Lineups unposted. Kasper 3/game not typed. Pitcher scores from later kHR are parked off this rewind.</p>
+    <div class="grid g3">${GAMES.map(g=>`<div class="card"><div class="chip chip-mute">${g.et}</div><h3 style="margin:8px 0">${g.away} @ ${g.home}</h3><div class="sub">${g.sp}</div><p class="why">${g.note}</p></div>`).join("")}</div></div>`;
+  if(STATE.tab==="games") return `<div class="kasper"><h3>Game Board</h3>
+    <p class="lede">Three unstarted games. TOP-2 empty until the hold lifts. Tape under each card is Payoff/Barry only.</p>
+    <div class="grid g3">${GAMES.map(g=>{
+      const pool=PLAYERS.filter(p=>p.game===g.game);
+      return `<div class="card"><span class="chip chip-amber">HOLD</span> <span class="chip chip-mute">lineups unposted</span>
+        <h3 style="margin:8px 0">${logo(g.away)}${g.away} @ ${logo(g.home)}${g.home}</h3>
+        <div class="sub">${g.et} · ${g.sp}</div>
+        <div class="empty">TOP-2 empty</div>
+        <div class="sub">Morning tape</div>
+        ${pool.map(p=>`<div style="padding:6px 0;border-top:1px solid #f0eadf">${logo(p.team)}${nameBtn(p)} · ${p.sources}</div>`).join("")}
+      </div>`;
+    }).join("")}</div></div>`;
+  if(STATE.tab==="parlay") return `<div class="kasper"><h3>Parlay Card</h3>
+    <p class="lede">Grid stays drawn. Tickets stay empty. Hold is on. Payoff pairings sit on the rail as tape, not composed tickets.</p>
+    <div class="grid g2">${["5 STRAIGHTS","3 TWO-LEG","3 THREE-LEG","3 FOUR-LEG","2 FIVE-LEG"].map(t=>`<div class="card"><div class="chip chip-mute">${t}</div><div class="empty">Empty on purpose · hold</div></div>`).join("")}</div>
+    <div class="kasper" style="margin-top:14px"><h3>Payoff pairings · tape</h3>${PAIRS.map(x=>`<div class="why">${x}</div>`).join("")}
+      <p class="lede" style="margin-top:10px">HRK dump tape (not tickets): ${HRK.join(" · ")}</p></div></div>`;
   if(STATE.tab==="cappers") return `<div class="kasper"><h3>Season-to-date cappers</h3>
+    <p class="lede">Weights start equal. 9 AM snapshot — nobody has a hit yet. Do not grade moons, pivots, or dump sheets.</p>
     <table><thead><tr><th>Handle</th><th>Today</th><th>Weight</th></tr></thead><tbody>
-    <tr><td>@PayoffBetsMLB</td><td>7 dashed locks</td><td>Equal</td></tr>
-    <tr><td>@parlaybarry</td><td>6 juice · 2 SIT</td><td>Equal</td></tr>
-    <tr><td>@TheHome_RunKing</td><td>5 ticket names</td><td>Equal</td></tr>
-    <tr><td>@KasperMLB</td><td>#1+#2 sourced</td><td>Equal</td></tr>
-    <tr><td>@jakevenomapp</td><td>Homer + Viper Ortiz</td><td>Equal</td></tr>
+    <tr><td>@PayoffBetsMLB</td><td>Sheet 6:40 AM CT</td><td>Equal</td></tr>
+    <tr><td>@parlaybarry</td><td>Juice 6:53 AM CT · dirty SP tags</td><td>Equal</td></tr>
+    <tr><td>@TheHome_RunKing</td><td>10-name dump overnight</td><td>Equal</td></tr>
+    <tr><td>@KasperMLB</td><td>Video only · ranks not typed</td><td>Equal</td></tr>
+    <tr><td>@jakevenomapp</td><td>Waiting</td><td>Equal</td></tr>
+    <tr><td>SportsPredict</td><td>0 A+</td><td>Equal</td></tr>
     </tbody></table></div>`;
-  const rows=[...PLAYERS].sort((a,b)=>b.src-a.src);
+  if(STATE.tab==="data") return `<div class="kasper"><h3>Data tray</h3>
+    <p class="lede">9:00 AM CT rewind. Slate and probables are in. Lineups are not. Drop Venom, typed Kasper 3/game, and SP A+ to lift the hold.</p>
+    <div class="grid g2"><div class="card"><div class="chip chip-amber">WAITING</div><p class="why">venom.csv · kasper.csv · sp_hr.csv</p></div>
+    <div class="card"><div class="chip chip-pine">PULLED</div><p class="why">StatsAPI 824787 / 824221 / 823169 · Payoff 6:40 · Barry 6:53 · HRK overnight · Kasper video 2:50</p></div></div></div>`;
+  const rows=ranked();
   return `<div class="kasper"><h3>Common Names Consensus</h3>
-    <p class="lede">Source count is the heat. OVER names have no Venom chip. Gold-row is Eldridge. 0 A+.</p>
+    <p class="lede">HOLD. No Venom chip. No Kasper #1/#2. No SP A+. Two-source tape is Eldridge and Basallo — that is not a gold-row.</p>
     <div class="chips" style="margin-bottom:12px">
-      <span class="chip chip-pine">3-src Eldridge · Alonso · Torkelson</span>
-      <span class="chip chip-amber">Vault posted · not credited</span>
-      <span class="chip chip-mute">0 A+</span>
+      <span class="chip chip-amber">HOLD</span>
+      <span class="chip chip-gold">0 A+</span>
+      <span class="chip chip-mute">lineups unposted</span>
+      <span class="chip chip-pine">2-src tape Eldridge · Basallo</span>
     </div>
-    <table><thead><tr><th>Hitter</th><th>Game</th><th>Src</th><th>Sources</th><th>Venom</th><th>Kasper</th><th>Flag</th></tr></thead>
+    <table><thead><tr><th>Hitter</th><th>Game</th><th>Src</th><th>Sources</th><th>Payoff</th><th>Barry</th><th>Flag</th></tr></thead>
     <tbody>${rows.map(p=>`<tr>
       <td>${logo(p.team)}${nameBtn(p)} · ${p.team}</td><td>${p.game}</td>
       <td><span class="heat ${heat(p.src)}">${p.src}</span></td>
-      <td>${p.sources}</td><td>${p.venom}</td><td>${p.kasper}</td><td>${p.flag}</td>
-    </tr>`).join("")}</tbody></table></div>`;
+      <td>${p.sources}</td><td>${p.payoff}</td><td>${p.barry}</td><td>${p.flag}</td>
+    </tr>`).join("")}</tbody></table></div>
+    <div class="kasper"><h3>Tracked handles · 9:00 AM CT</h3>
+    <table><thead><tr><th>Status</th><th>When</th><th>Handle</th><th>Today</th></tr></thead>
+    <tbody>${HANDLES.map(h=>`<tr>${h.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 }
 function viewOther(){
   if(STATE.sport==="nba") return `<div class="kasper"><h3>Prop Desk</h3><p class="lede">No NBA games Monday 9/21. Preseason opens October. WNBA tape is parked off this desk.</p></div>`;
-  if(STATE.sport==="nfl"&&STATE.tab==="week3") return `<div class="kasper"><h3>Week 3 slate</h3><p class="lede">Do not spend BUF / DET / DEN / BAL / LAR without a written reason. TNF is ATL @ GB.</p></div>`;
-  if(STATE.sport==="nfl") return `<div class="kasper"><h3>Monday Night</h3><p class="lede">Giants (1-0) at Rams (0-1), 8:15 ET, SoFi. Last W2 game. A laser is a model-vs-market gap, not a tweet.</p>
-    <div class="grid g2"><div class="card"><img src="${NFL("nyg")}" width="28"><strong> Giants</strong><p class="why">Road MNF after a short week is the fade case, not a lock.</p></div>
-    <div class="card"><img src="${NFL("lar")}" width="28"><strong> Rams</strong><p class="why">Home get-right after Australia. Line not stable enough to laser without your sheet.</p></div></div></div>`;
-  if(STATE.tab==="chalk") return `<div class="kasper"><h3>Chalk</h3><p class="lede">Splash W2 dead — TB 29.3%. 48.6% of that field gone. SF cashed 35-13 vs MIA.</p></div>`;
-  if(STATE.tab==="path") return `<div class="kasper"><h3>Path</h3><p class="lede">W3 TNF is ATL @ GB. Do not double-up SF if you already spent it. Circa should not go 100% GB.</p></div>`;
-  return `<div class="kasper"><h3>Survivor Board</h3><p class="lede">Week 2 is closed after MNF. Live question is what you burned and what Week 3 still owes you.</p>
+  if(STATE.sport==="nfl"&&STATE.tab==="week3") return `<div class="kasper"><h3>Week 3 slate</h3><p class="lede">W3 is not open at 9 AM Monday. Look-ahead only. Do not spend BUF / DET / DEN / BAL / LAR without a written reason. TNF is ATL @ GB.</p></div>`;
+  if(STATE.sport==="nfl") return `<div class="kasper"><h3>Monday Night</h3>
+    <p class="lede">9 AM CT. Giants (1-0) at Rams (0-1), 8:15 ET, SoFi, ESPN/ABC. Morning market band LAR -6.5 to -7, total 47.5–48. Puka replacement is the injury question. No laser until a sheet lands.</p>
+    <div class="grid g2"><div class="card"><img src="${NFL("nyg")}" width="28"> <strong>Giants</strong><p class="why">Road MNF after a short week is the fade case, not a lock.</p></div>
+    <div class="card"><img src="${NFL("lar")}" width="28"> <strong>Rams</strong><p class="why">Home get-right after Australia. Number sits -6.5/-7. Not a laser yet.</p></div></div></div>`;
+  if(STATE.tab==="chalk") return `<div class="kasper"><h3>Chalk</h3><p class="lede">Sunday already happened before this clock. Splash W2 wrecking ball was TB 29.3%. SF cashed. W3 is not open.</p></div>`;
+  if(STATE.tab==="path") return `<div class="kasper"><h3>Path</h3><p class="lede">Log burns from Sunday. Do not post a W3 pick board at 9 AM Monday. Circa should not go 100% GB when TNF opens.</p></div>`;
+  return `<div class="kasper"><h3>Survivor Board</h3>
+    <p class="lede">9 AM Monday. Sunday is in the book (TB dead, SF cashed). MNF still tonight. W3 is not open.</p>
     <div class="grid g3">
       <div class="card"><div class="chip chip-brick">W2 DEATH</div><h3>Buccaneers</h3><p class="why">29.3% of Splash. Cody FV on TB was 22.</p></div>
       <div class="card"><div class="chip chip-pine">W2 CASH</div><h3>49ers</h3><p class="why">Public co-chalk that actually won.</p></div>
-      <div class="card"><div class="chip chip-amber">W3 BUTTON</div><h3>Packers -6.5</h3><p class="why">TNF vs ATL. Office pools flock here.</p></div>
+      <div class="card"><div class="chip chip-amber">W3 CLOSED</div><h3>Not open yet</h3><p class="why">TNF ATL @ GB is look-ahead only.</p></div>
     </div></div>`;
 }
 function openPlayer(last){
   const p=PLAYERS.find(x=>x.last===last); if(!p) return;
   playerModal.innerHTML=`<div class="player-card"><header style="display:flex;justify-content:space-between;align-items:flex-start">
-    <div><h2>${p.player}</h2><p class="sub">${p.team} · ${p.game}</p></div>
+    <div><h2>${p.player}</h2><p class="sub">${p.team} · ${p.game} · lineups unposted</p></div>
     <button class="xbtn" data-close="1">✕</button></header>
-    <div class="chips" style="margin:12px 0"><span class="chip chip-gold">SRC ${p.src}</span><span class="chip chip-mute">${p.flag}</span></div>
+    <div class="chips" style="margin:12px 0"><span class="chip chip-gold">SRC ${p.src}</span><span class="chip chip-mute">${p.flag}</span><span class="chip chip-amber">HOLD</span></div>
     <table><tbody>
       <tr><td>Sources</td><td>${p.sources}</td></tr>
-      <tr><td>Venom</td><td>${p.venom}</td></tr>
-      <tr><td>Kasper</td><td>${p.kasper}</td></tr>
+      <tr><td>Payoff</td><td>${p.payoff}</td></tr>
+      <tr><td>Barry</td><td>${p.barry}</td></tr>
+      <tr><td>Venom</td><td>Waiting · not posted by 9 AM</td></tr>
+      <tr><td>Kasper</td><td>Video only · ranks not typed</td></tr>
+      <tr><td>A+</td><td>0</td></tr>
     </tbody></table>
     <p class="why">${p.note}</p></div>`;
   playerModal.classList.remove("hidden");
 }
 function draw(){
   renderSports(); renderTabs();
-  banner.innerHTML=STATE.sport==="mlb"
-    ? `<div><p><strong>Night mode.</strong> TOR@BAL delayed · WSH@DET live · MIN@SF is the only unstarted card. Gold-row max: <strong>Eldridge</strong>.</p></div>
-       <div class="chips"><span class="chip chip-amber">2 live / delayed</span><span class="chip chip-pine">Vault posted · not credited</span><span class="chip chip-mute">0 A+</span></div>`
-    : `<div><p>Desk is live on GitHub Pages. Hard-refresh if you still see a cached 404.</p></div>`;
+  banner.innerHTML = STATE.sport==="mlb"
+    ? `<div><p><strong>Morning hold · 9:00 AM CT.</strong> Three games, zero first pitches, lineups unposted, Venom unposted, 0 A+. Consensus stays dark.</p>
+        <p class="why" style="margin-top:6px">Landed: Payoff 6:40 AM · Barry 6:53 AM · HRK overnight dump · Kasper video. Overlap on tape only: Eldridge and Basallo.</p></div>
+       <div class="chips"><span class="chip chip-amber">HOLD</span><span class="chip chip-pine">3 landed</span><span class="chip chip-gold">0 A+</span><span class="chip chip-mute">lineups unposted</span></div>`
+    : `<div><p>Same 9:00 AM CT rewind. MLB hold does not change the other desks.</p></div>`;
   main.innerHTML=STATE.sport==="mlb"?viewMLB():viewOther();
   document.querySelectorAll("[data-player]").forEach(btn=>btn.onclick=e=>{e.preventDefault();openPlayer(btn.dataset.player)});
 }
