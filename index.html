@@ -5,125 +5,117 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Properating Room</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-:root{
-  --ink:#f3eee2;--court:#fffdf7;--navy:#fffaf1;--raised:#fff8ea;--panel:#f7f1e4;
-  --ivory:#1c1914;--mute:#5b564c;--faint:#8a8478;
-  --gold:#b0892d;--goldhi:#6e5424;--pine:#4f7a3e;--ice:#3a6d93;--brick:#b45a4a;--amber:#c27a2a;
-  --line:rgba(40,32,18,.14);--strong:rgba(40,32,18,.28);--flood:rgba(176,137,45,.14);
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--ink);color:var(--ivory);font-family:"IBM Plex Sans",sans-serif}
-body{background:radial-gradient(ellipse 50% 28% at 12% -8%, rgba(176,137,45,.10), transparent 70%),linear-gradient(180deg,#f7f2e6 0%,#f3eee2 46%,#efe8d8 100%);min-height:100vh}
-button{font-family:inherit;cursor:pointer}
-.wrap{max-width:88rem;margin:0 auto;padding:0 20px 72px}
-header.top{padding:18px 20px 8px}
-.top-inner{max-width:88rem;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
-.brand h1{margin:0;font-size:28px;letter-spacing:-.04em;font-weight:700;color:#5c4318}
-.brand p{margin:4px 0 0;color:var(--mute);font-size:13px}
-.meta{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
-.meta b{color:var(--ivory);font-weight:600}
-.sports{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:6px;margin-top:14px}
-.sport{background:transparent;border:0;color:var(--mute);border-radius:10px;padding:10px 8px;min-height:52px}
-.sport small{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:3px;color:var(--faint)}
-.sport.on{background:#efe4c8;color:#1c1914}
-.sport.on small{color:#8a6a2f}
-.deskbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:18px 0 12px}
-.deskbar h2{margin:0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#8a6a2f;font-family:"IBM Plex Mono",monospace}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tab{background:#fffdf8;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:40px;font-size:13px}
-.tab.on{background:#c4a046;color:#1c1408;border-color:#c4a046;font-weight:600}
-.banner,.card,section.block{background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-.banner{margin-bottom:14px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between}
-.banner p,.lede,.sub,.why{color:var(--mute);font-size:14px;margin:0}
-.lede{margin:0 0 12px;max-width:92ch;line-height:1.45}
-.why{margin-top:8px;font-size:12px;line-height:1.45}
-.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}
-.kpi{background:#f7f1e4;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
-.kpi b{display:block;font-size:20px;color:#5c4318;font-variant-numeric:tabular-nums}
-.kpi span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.chip{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
-.chip-gold{background:#f3e3b0;color:#6e5424}.chip-pine{background:#d7e8c8;color:#2f5a28}.chip-ice{background:#d4e4f2;color:#2a5578}.chip-brick{background:#f3d4cc;color:#8a3328}.chip-amber{background:#f4dfb8;color:#8a5a18}.chip-mute{background:#efe8d8;color:#5b564c}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
-input[type=search],select,input[type=text],input[type=number]{background:#fff;border:1px solid var(--strong);color:#1c1914;border-radius:10px;padding:8px 10px;min-height:40px;font:inherit}
-.grid{display:grid;gap:10px}.g6{grid-template-columns:repeat(6,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
-table{width:100%;border-collapse:collapse;font-size:13px;background:#fffdf8}
-th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:500;padding:8px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none}
-td{padding:9px 8px;border-bottom:1px solid rgba(40,32,18,.08);vertical-align:middle}
-tr:hover td{background:rgba(196,160,70,.10)}
-.name-btn,.linkish{background:none;border:0;padding:0;color:#6e5424;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
-.heat{display:inline-block;min-width:36px;text-align:center;border-radius:6px;padding:2px 6px;font-weight:700;font-size:12px;font-variant-numeric:tabular-nums}
-.h-g{background:#7dae4a;color:#102008}.h-y{background:#e8c547;color:#1c1408}.h-o{background:#e0893c;color:#fff}.h-r{background:#c45c4a;color:#fff}
-.empty{color:var(--mute);padding:18px 8px;text-align:center}
-.modal-back{position:fixed;inset:0;background:rgba(40,32,18,.45);z-index:40;display:flex;align-items:center;justify-content:center;padding:20px}
-.hidden{display:none!important}
-.player-card{width:min(680px,100%);max-height:90vh;overflow:auto;background:#fffdf8;border-radius:16px;border:1px solid var(--strong);padding:18px}
-.player-card h2{margin:0;color:#5c4318}
-.xbtn{background:#efe4c8;border:1px solid var(--line);color:#1c1914;border-radius:999px;width:36px;height:36px}
-.gate{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.dot{width:10px;height:10px;border-radius:50%;background:var(--faint);display:inline-block}
-.dot.on{background:var(--pine)}.dot.wait{background:var(--amber)}
-.check li{margin:0 0 6px;color:var(--mute)}
-.check .ok{color:#2f5a28}.check .no{color:#8a3328}.check .wait{color:#8a5a18}
-.ticket{border:1px dashed var(--strong);border-radius:10px;padding:10px;min-height:88px;background:#fff}
-.muted{color:var(--faint);font-size:12px}.warn{color:#8a3328}.ok{color:#2f5a28}
-.bo{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--mute)}
-footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em}
-@media(max-width:1100px){.kpis,.g6{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.kpis,.g6,.g3,.g2,.g4,.sports{grid-template-columns:1fr 1fr}.meta{text-align:left}}
-@media(max-width:520px){.kpis,.g6,.g3,.g2,.g4,.sports{grid-template-columns:1fr}}
-</style>
-</head>
+:root{--mute:#5b564c;--faint:#8a8478;--goldhi:#6e5424;--line:rgba(40,32,18,.14);--strong:rgba(40,32,18,.28)}
+*{box-sizing:border-box}html,body{margin:0;background:#f3eee2;color:#1c1914;font-family:"IBM Plex Sans",sans-serif}
+body{background:linear-gradient(180deg,#f7f2e6,#efe8d8);min-height:100vh}
+.wrap{max-width:88rem;margin:0 auto;padding:0 16px 64px}
+header.top{padding:18px 16px 8px}.top-inner{max-width:88rem;margin:0 auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:26px;color:#5c4318}p{margin:4px 0 0;color:var(--mute);font-size:13px}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-align:right}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.tab{background:#fffdf8;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer;color:var(--mute)}
+.tab.on{background:#c4a046;color:#1c1408;font-weight:600}
+.banner,.card{background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 12px}
+.lede,.why{color:var(--mute);font-size:13px;line-height:1.45}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-right:4px}
+.chip-gold{background:#f3e3b0;color:#6e5424}.chip-pine{background:#d7e8c8;color:#2f5a28}.chip-brick{background:#f3d4cc;color:#8a3328}.chip-amber{background:#f4dfb8;color:#8a5a18}.chip-mute{background:#efe8d8}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:7px 6px;border-bottom:1px solid rgba(40,32,18,.08);text-align:left}
+th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.heat{display:inline-block;padding:2px 6px;border-radius:6px;font-weight:700}.h-g{background:#7dae4a;color:#102008}
+.grid{display:grid;gap:10px}.g2{grid-template-columns:repeat(2,1fr)}
+.ticket{border:1px dashed var(--strong);border-radius:10px;padding:10px;margin:8px 0;background:#fff}
+.muted{color:var(--faint);font-size:12px}h3{margin:0 0 8px;color:var(--goldhi);font-size:15px}
+.panel{display:none}.panel.on{display:block}
+@media(max-width:800px){.g2{grid-template-columns:1fr}.meta{text-align:left}}
+</style></head>
 <body>
-<header class="top">
-  <div class="top-inner">
-    <div class="brand">
-      <h1>The Properating Room</h1>
-      <p>Consensus factory · automated slate first · no invented names · A+ stays isolated</p>
-    </div>
-    <div class="meta">
-      <div>Slate <b>Tue 9/22</b></div>
-      <div>As of <b>4:41 PM CT</b></div>
-      <div>Persist <b>922-tabs-v1</b></div>
-    </div>
-  </div>
-  <div class="wrap" style="padding-bottom:0"><nav class="sports" id="sports"></nav></div>
-</header>
+<header class="top"><div class="top-inner">
+<div><h1>The Properating Room</h1><p>9/22 boards in the page. Lab is not a published ticket.</p></div>
+<div class="meta"><div>Slate <b>Tue 9/22</b></div><div>As of <b>4:41 PM CT</b></div><div>Persist <b>922-tabs-v1</b></div></div>
+</div></header>
 <div class="wrap">
-  <div class="deskbar"><h2 id="deskTitle">Home Run Desk</h2><div class="tabs" id="tabs"></div></div>
-  <div class="banner" id="banner"></div>
-  <div class="kpis" id="kpis"></div>
-  <main id="main"><section class="block"><p class="muted">Loading 9/22 desk…</p></section></main>
-  <footer class="foot">9/22 tabs load · persist 922-tabs-v1 · hard-refresh this same URL</footer>
+<div class="banner"><p><strong>Hard-refresh this URL.</strong> The blank page was a 404 on desk-data.js / desk-ui.js. These three boards are now HTML, not a missing script.</p>
+<p class="why">A+ live: Hernandez 23.7, Burger 23.3, Muncy 22.6, Langeliers 22.5. 2-src: Elly, Bauers, Bernal.</p></div>
+<div class="tabs">
+<button class="tab on" data-p="consensus">Consensus</button>
+<button class="tab" data-p="games">Game Board</button>
+<button class="tab" data-p="parlay">Parlay Card</button>
 </div>
-<div class="modal-back hidden" id="playerModal"></div>
+<section class="panel on" id="consensus">
+<div class="card"><span class="chip chip-gold">A+ HR LIVE</span>
+<table><thead><tr><th>Hitter</th><th>Game</th><th>Vs</th><th>A+</th><th>Shop</th><th>Sit</th></tr></thead><tbody>
+<tr><td>Heriberto Hernandez MIA</td><td>MIA@CHC</td><td>Imanaga</td><td><span class="heat h-g">23.7%</span></td><td>+614 Novig</td><td>Projected, Wrigley tax</td></tr>
+<tr><td>Jake Burger TEX</td><td>NYM@TEX</td><td>Manaea</td><td><span class="heat h-g">23.3%</span></td><td>+400 Kalshi</td><td>Confirmed 4</td></tr>
+<tr><td>Max Muncy LAD</td><td>SD@LAD</td><td>King</td><td><span class="heat h-g">22.6%</span></td><td>+430 Bally</td><td>Projected, Wx +7.9%</td></tr>
+<tr><td>Shea Langeliers ATH</td><td>LAA@ATH</td><td>Kikuchi</td><td><span class="heat h-g">22.5%</span></td><td>+325 Bet365</td><td>edge -4.5%, Sutter +11.3%</td></tr>
+</tbody></table></div>
+<div class="card"><span class="chip chip-pine">TWO-SOURCE</span>
+<table><thead><tr><th>Hitter</th><th>Game</th><th>Sources</th><th>Venom</th><th>Price</th></tr></thead><tbody>
+<tr><td>Elly De La Cruz CIN</td><td>CIN@ATL</td><td>Venom + Kasper</td><td>1 VALUE</td><td>+390</td></tr>
+<tr><td>Jake Bauers MIL</td><td>MIL@PHI</td><td>Venom + Kasper</td><td>15</td><td>+520</td></tr>
+<tr><td>Leo Bernal STL</td><td>STL@PIT</td><td>Venom + Kasper</td><td>39 VALUE</td><td>+610</td></tr>
+</tbody></table></div>
+<div class="card"><h3>Next names</h3>
+<p class="why">Rice K1 nightcap. Trout K1. Yordan K1. De Paula K1. Merrill Homer 2 VALUE +475. Soto K1. Grichuk K1. PCA Edge 9 +650. Carroll Homer 7 Coors. Tatis Homer 8. Acuna Homer 10. Jones Homer 11. Gelof Homer 12. B. Lowe Edge 13 +599. E. Rodriguez Edge 2 +800. Pasquantino Edge 1 +900.</p>
+<p class="muted">Parked: Alonso/Mayo/Cowser PPD. Greene/Callahan OUT. Schwarber OVER. G1 FINAL.</p></div>
+</section>
+<section class="panel" id="games">
+<div class="grid g2">
+<div class="card"><span class="chip chip-mute">FINAL</span><h3>TB @ NYY G1</h3><p class="why">TB 0-NYY 2. Off the live HR board.</p></div>
+<div class="card"><span class="chip chip-brick">PPD</span><h3>TOR @ BAL</h3><p class="why">Do not ticket. Alonso / Mayo / Basallo tape only.</p></div>
+<div class="card"><h3>WSH @ DET</h3><p class="why">1. James Wood K1 SIT 1 RF. Greene/Callahan OUT. No second name cleared.</p></div>
+<div class="card"><h3>STL @ PIT wind in CF</h3><p class="why">1 Bernal 2-src +610. 2 B. Lowe VALUE +599. 3 Reynolds Edge 6 + Viper 9. 4 Saggese Viper 2. 5 Walker Viper 1.</p></div>
+<div class="card"><h3>MIL @ PHI wind in CF</h3><p class="why">1 Bauers 2-src +520. 2 W. Contreras Edge 12. 3 Turang Edge 8. 4 Mitchell Edge 17. 5 Bohm Viper 5.</p></div>
+<div class="card"><h3>CLE @ BOS Fenway in CF</h3><p class="why">1 Jose Ramirez K1. 2 Abreu Edge 20 +710.</p></div>
+<div class="card"><h3>CIN @ ATL Truist +11.1%</h3><p class="why">1 Elly 2-src +390. 2 Acuna Homer 10. 3 Stephenson Viper 8. 4 McLain Viper 7.</p></div>
+<div class="card"><h3>TB @ NYY G2</h3><p class="why">1 Rice K1. 2 Jones Homer 11 +520. 3 Mesa Edge 15 +800. LU unposted.</p></div>
+<div class="card"><h3>CWS @ KC Kauffman in CF</h3><p class="why">1 Grichuk K1. 2 Pasquantino Edge 1 +900. 3 Jensen Edge 3 +850.</p></div>
+<div class="card"><h3>MIA @ CHC Wrigley in CF</h3><p class="why">1 Hernandez A+ 23.7 +614. 2 PCA Edge 9 +650. 3 Happ Edge 4 +1040. 4 Suzuki K1. 5 Stowers Viper 3.</p></div>
+<div class="card"><h3>NYM @ TEX</h3><p class="why">1 Burger A+ 23.3 +400 confirmed 4. 2 Soto K1. 3 F. Alvarez VALUE +750.</p></div>
+<div class="card"><h3>AZ @ COL Elite</h3><p class="why">Environment board. 1 Carroll Homer 7 +390. 2 Moniak Viper 20.</p></div>
+<div class="card"><h3>LAA @ ATH Sutter +11.3%</h3><p class="why">1 Langeliers A+ 22.5 +325 edge -4.5%. 2 Trout K1. 3 Gelof Homer 12.</p></div>
+<div class="card"><h3>HOU @ SEA</h3><p class="why">Gilbert 28 HR volume. 1 Yordan K1. LU unposted.</p></div>
+<div class="card"><h3>MIN @ SF Oracle Poor</h3><p class="why">1 Emmanuel Rodriguez Edge 2 +7.6% +800. LU unposted.</p></div>
+<div class="card"><h3>SD @ LAD Dodger +7.9%</h3><p class="why">1 Muncy A+ 22.6 +430. 2 De Paula K1. 3 Merrill VALUE +475. 4 Tatis Homer 8. 5 Tucker VALUE +560.</p></div>
+</div>
+</section>
+<section class="panel" id="parlay">
+<p class="lede">Forced 5 / 3 / 3 / 3 / 2. Lab only. Payoff and Barry still out.</p>
+<div class="grid g2">
+<div class="card"><span class="chip chip-gold">5 STRAIGHTS</span>
+<div class="ticket"><b>Burger</b> +400. A+ confirmed 4 vs Manaea.</div>
+<div class="ticket"><b>Muncy</b> +430. A+ vs King. Dodger +7.9%.</div>
+<div class="ticket"><b>Hernandez</b> +614. A+ vs Imanaga. Wrigley tax.</div>
+<div class="ticket"><b>Elly</b> +390. 2-src. Truist +11.1%.</div>
+<div class="ticket"><b>Bauers</b> +520. 2-src. Citizens wind-in tax.</div></div>
+<div class="card"><span class="chip chip-gold">3 TWO-LEG</span>
+<div class="ticket"><b>Burger + Elly</b>. Best A+ + best 2-src env.</div>
+<div class="ticket"><b>Muncy + Langeliers</b>. West A+. Size down Langeliers -4.5%.</div>
+<div class="ticket"><b>Bauers + Bernal</b>. Two posted 2-src. Both wind-in.</div></div>
+<div class="card"><span class="chip chip-gold">3 THREE-LEG</span>
+<div class="ticket"><b>Burger + Elly + Bauers</b></div>
+<div class="ticket"><b>Hernandez + PCA + Happ</b>. Same-game CHC. Wind-in tax.</div>
+<div class="ticket"><b>Pasquantino + Jensen + Elly</b>. KC Edge 1+3 + Truist.</div></div>
+<div class="card"><span class="chip chip-gold">3 FOUR-LEG</span>
+<div class="ticket"><b>Burger + Muncy + Elly + Bauers</b></div>
+<div class="ticket"><b>Pasquantino + Reynolds + Saggese + Happ</b>. Edge board.</div>
+<div class="ticket"><b>Burger + Hernandez + Merrill + Lowe</b></div></div>
+<div class="card"><span class="chip chip-gold">2 FIVE-LEG</span>
+<div class="ticket"><b>Burger + Muncy + Elly + Bauers + Bernal</b></div>
+<div class="ticket"><b>Burger + Pasquantino + Rodriguez + Saggese + Walker</b>. A+ + Edge + barrel Vipers.</div></div>
+</div>
+</section>
+</div>
 <script>
-(async function(){
-  const box=document.getElementById('main');
-  try{
-    const n=10;
-    const parts=await Promise.all(Array.from({length:n},function(_,i){
-      return fetch('pack'+(i+1)+'.js?d=922tabsv1').then(function(r){
-        if(!r.ok) throw new Error('missing pack'+(i+1)+' ('+r.status+')');
-        return r.text();
-      });
-    }));
-    const b64=parts.join('').replace(/\s+/g,'');
-    const bin=atob(b64);
-    const bytes=Uint8Array.from(bin, function(c){ return c.charCodeAt(0); });
-    const text=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
-    const s=document.createElement('script');
-    s.textContent=text;
-    document.body.appendChild(s);
-  }catch(e){
-    if(box) box.innerHTML='<section class="block"><p class="warn">Desk failed to load: '+String(e.message||e)+'. Hard-refresh this same URL.</p></section>';
-    console.error(e);
-  }
-})();
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById(btn.dataset.p).classList.add('on');
+  };
+});
 </script>
-</body>
-</html>
+</body></html>
