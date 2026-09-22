@@ -2,10 +2,16 @@
 
 Single-file sports desk dashboard (MLB · NBA · NFL · Survivor).
 
-**Live:** https://pauldcross2-design.github.io/properating-room/
+**Live (after Pages is switched on):** https://pauldcross2-design.github.io/properating-room/
 
 Repo: https://github.com/pauldcross2-design/properating-room
 
-Slate tape is 2026-09-21. If Pages is blank, wait one minute for the Actions deploy, then hard-refresh.
+## Turn Pages on (one click)
 
-Enable Pages once: Settings → Pages → Source = **GitHub Actions**.
+The desk files are already on `main`. GitHub will not let Actions create the Pages site by itself.
+
+1. Open https://github.com/pauldcross2-design/properating-room/settings/pages
+2. Under **Build and deployment → Source**, choose **GitHub Actions**
+3. Wait about a minute, then hard-refresh the live link
+
+Slate tape is 2026-09-21.
