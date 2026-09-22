@@ -8,29 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-:root{
-  --ink:#070b14;--court:#0a101c;--navy:#0d1528;--raised:#152038;--panel:#121c34;
-  --ivory:#e4e0d4;--mute:#9a978c;--faint:#6e6c64;
-  --gold:#c4a574;--goldhi:#e8d5a3;--pine:#7d9a78;--ice:#7aa2c8;--brick:#c17a6c;--amber:#d4a574;
-  --line:rgba(228,224,212,.13);--strong:rgba(228,224,212,.24);--flood:rgba(232,213,163,.16);
-}
+:root{--ink:#070b14;--court:#0a101c;--navy:#0d1528;--raised:#152038;--panel:#121c34;--ivory:#e4e0d4;--mute:#9a978c;--faint:#6e6c64;--gold:#c4a574;--goldhi:#e8d5a3;--pine:#7d9a78;--ice:#7aa2c8;--brick:#c17a6c;--amber:#d4a574;--line:rgba(228,224,212,.13);--strong:rgba(228,224,212,.24)}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--ink);color:var(--ivory);font-family:"IBM Plex Sans",sans-serif}
-body{
-  background:
-    radial-gradient(ellipse 55% 32% at 14% -6%, rgba(232,213,163,.16), transparent 70%),
-    radial-gradient(ellipse 55% 32% at 86% -6%, rgba(232,213,163,.10), transparent 70%),
-    linear-gradient(180deg,#0a1224 0%,#070b14 46%,#05070d 100%);
-  min-height:100vh;
-}
+body{background:radial-gradient(ellipse 55% 32% at 14% -6%,rgba(232,213,163,.16),transparent 70%),radial-gradient(ellipse 55% 32% at 86% -6%,rgba(232,213,163,.10),transparent 70%),linear-gradient(180deg,#0a1224 0%,#070b14 46%,#05070d 100%);min-height:100vh}
 button{font-family:inherit;cursor:pointer}
 .wrap{max-width:88rem;margin:0 auto;padding:0 20px 72px}
 header.top{padding:18px 20px 8px}
 .top-inner{max-width:88rem;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
-.brand h1{
-  margin:0;font-size:28px;letter-spacing:-.04em;font-weight:600;color:var(--goldhi);
-  text-shadow:0 1px 0 #8a7340,0 2px 0 #6e5a32,0 3px 10px rgba(0,0,0,.55),0 0 28px rgba(232,213,163,.22);
-}
+.brand h1{margin:0;font-size:28px;letter-spacing:-.04em;font-weight:600;color:var(--goldhi);text-shadow:0 1px 0 #8a7340,0 2px 0 #6e5a32,0 3px 10px rgba(0,0,0,.55),0 0 28px rgba(232,213,163,.22)}
 .brand p{margin:4px 0 0;color:#cbbfd8;font-size:13px}
 .meta{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#cbbfd8}
 .meta b{color:var(--ivory);font-weight:500}
@@ -62,19 +48,17 @@ header.top{padding:18px 20px 8px}
 .chip-amber{background:rgba(212,165,116,.18);color:var(--amber)}
 .chip-mute{background:rgba(228,224,212,.08);color:var(--mute)}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
-input[type=search],select,input[type=text],input[type=number]{background:var(--court);border:1px solid var(--strong);color:var(--ivory);border-radius:10px;padding:8px 10px;min-height:40px;font:inherit}
+input[type=search],select{background:var(--court);border:1px solid var(--strong);color:var(--ivory);border-radius:10px;padding:8px 10px;min-height:40px;font:inherit}
 .grid{display:grid;gap:10px}
-.g6{grid-template-columns:repeat(6,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g2{grid-template-columns:repeat(2,1fr)}
-.g4{grid-template-columns:repeat(4,1fr)}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:500;padding:8px;border-bottom:1px solid var(--line)}
 td{padding:9px 8px;border-bottom:1px solid rgba(228,224,212,.07);vertical-align:middle}
 tr:hover td{background:rgba(232,213,163,.04)}
 .name-btn,.linkish{background:none;border:0;padding:0;color:var(--goldhi);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
 .heat{display:inline-block;min-width:36px;text-align:center;border-radius:6px;padding:2px 6px;font-weight:600;font-size:12px;font-variant-numeric:tabular-nums}
-.h-g{background:var(--pine);color:#071109}.h-y{background:var(--gold);color:#1c1408}.h-o{background:#d9894a;color:#fff}.h-r{background:var(--brick);color:#fff}
+.h-y{background:var(--gold);color:#1c1408}.h-o{background:#d9894a;color:#fff}.h-r{background:var(--brick);color:#fff}
 .empty{color:var(--mute);padding:18px 8px;text-align:center}
 .modal-back{position:fixed;inset:0;background:rgba(7,11,20,.72);z-index:40;display:flex;align-items:center;justify-content:center;padding:20px}
 .hidden{display:none!important}
@@ -83,16 +67,16 @@ tr:hover td{background:rgba(232,213,163,.04)}
 .xbtn{background:var(--raised);border:1px solid var(--line);color:var(--ivory);border-radius:999px;width:36px;height:36px}
 .gate{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--faint);display:inline-block}
-.dot.on{background:var(--pine)}.dot.wait{background:var(--amber)}
+.dot.wait{background:var(--amber)}
 .check li{margin:0 0 6px;color:var(--mute)}
 .check .ok{color:var(--pine)}.check .no{color:var(--brick)}.check .wait{color:var(--amber)}
 .muted{color:var(--faint);font-size:12px}
 .warn{color:var(--brick)}
 .ok{color:var(--pine)}
 footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em}
-@media(max-width:1100px){.kpis,.g6{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.kpis,.g6,.g3,.g2,.g4,.sports{grid-template-columns:1fr 1fr}.meta{text-align:left}}
-@media(max-width:520px){.kpis,.g6,.g3,.g2,.g4,.sports{grid-template-columns:1fr}}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.kpis,.g3,.g2,.sports{grid-template-columns:1fr 1fr}.meta{text-align:left}}
+@media(max-width:520px){.kpis,.g3,.g2,.sports{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -119,6 +103,7 @@ footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM P
 </div>
 <div class="modal-back hidden" id="playerModal"></div>
 <script src="desk.js"></script>
-<script src="desk-ui.js"></script>
+<script src="desk-ui-a.js"></script>
+<script src="desk-ui-b.js"></script>
 </body>
 </html>
