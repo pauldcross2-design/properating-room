@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Properating Room</title>
+<style>
+  html,body{margin:0;background:#1a1430;color:#f4efe4;font-family:system-ui,sans-serif}
+  .boot{padding:28px 24px;max-width:40rem}
+  .boot p{color:#cbbfd8}
+</style>
+</head>
+<body>
+<div class="boot" id="boot"><p>Opening The Properating Room…</p></div>
+<script src="p1.js"></script>
+<script src="p2.js"></script>
+<script src="p3.js"></script>
+<script>
+async function boot() {
+  try {
+    const b64 = window.ROOM_P1 + window.ROOM_P2 + window.ROOM_P3;
+    const bin = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const stream = new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"));
+    const html = await new Response(stream).text();
+    document.open();
+    document.write(html);
+    document.close();
+  } catch (err) {
+    document.getElementById("boot").innerHTML = "<p>Could not inflate the desk.</p><pre>" + String(err) + "</pre>";
+  }
+}
+boot();
+</script>
+</body>
+</html>
