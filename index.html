@@ -87,8 +87,8 @@ footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM P
     </div>
     <div class="meta">
       <div>Slate <b>Tue 9/22</b></div>
-      <div>As of <b>4:12 PM CT</b></div>
-      <div>Persist <b>922-light-v1</b></div>
+      <div>As of <b>4:20 PM CT</b></div>
+      <div>Persist <b>922-light-v2</b></div>
     </div>
   </div>
   <div class="wrap" style="padding-bottom:0"><nav class="sports" id="sports"></nav></div>
@@ -98,7 +98,7 @@ footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM P
   <div class="banner" id="banner"></div>
   <div class="kpis" id="kpis"></div>
   <main id="main"><section class="block"><p class="muted">Loading full desk…</p></section></main>
-  <footer class="foot">9/22 close · persist 922-light-v1 · same board as the kitchen preview</footer>
+  <footer class="foot">9/22 close · persist 922-light-v2 · same board as the kitchen preview · A+ and 2-src pinned</footer>
 </div>
 <div class="modal-back hidden" id="playerModal"></div>
 <script>
@@ -107,7 +107,7 @@ footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM P
   try{
     const n=9;
     const parts=await Promise.all(Array.from({length:n},function(_,i){
-      return fetch('pack'+(i+1)+'.js?d=922light').then(function(r){
+      return fetch('pack'+(i+1)+'.js?d=922v2').then(function(r){
         if(!r.ok) throw new Error('missing pack'+(i+1)+' ('+r.status+')');
         return r.text();
       });

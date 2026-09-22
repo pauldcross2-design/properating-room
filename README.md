@@ -1,10 +1,8 @@
 # The Properating Room
 
-**Share this link. It does not change.**
-
+Canonical share URL (does not change):
 https://pauldcross2-design.github.io/properating-room/
 
-Daily slate updates overwrite the data behind that same URL. Do not send `?v=` links for sharing.
+Persist **922-light-v2**. Daily data updates overwrite `index.html` + `pack1.js`–`pack9.js` behind that same address.
 
-Theme: Kasper Classic Light cream.
-Weather source of record: [@BallparkPal](https://x.com/BallparkPal).
+If the board looks like yesterday’s thin HOLD tape, hard-refresh.
