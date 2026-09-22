@@ -119,6 +119,9 @@ footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM P
     const s=document.createElement('script');
     s.textContent=text;
     document.body.appendChild(s);
+    const p=document.createElement('script');
+    p.src='desk-patch.js?d=922v2';
+    document.body.appendChild(p);
   }catch(e){
     if(box) box.innerHTML='<section class="block"><p class="warn">Desk failed to load: '+String(e.message||e)+'. Hard-refresh this same URL.</p></section>';
     console.error(e);
