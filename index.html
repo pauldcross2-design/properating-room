@@ -4,35 +4,199 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Properating Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  html,body{margin:0;background:#1a1430;color:#f4efe4;font-family:system-ui,sans-serif}
-  .boot{padding:28px 24px;max-width:40rem}
-  .boot p{color:#cbbfd8}
-  pre{white-space:pre-wrap;color:#e8d5a3;font-size:12px}
+:root{--gold:#c4a574;--goldhi:#e8d5a3;--pine:#7d9a78;--ice:#7aa2c8;--brick:#c17a6c;--amber:#d4a574;--mute:#9a978c;--faint:#6e6c64}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#f3eee4;color:#2b2a28;font-family:"IBM Plex Sans",sans-serif}
+.shell{background:radial-gradient(ellipse 55% 32% at 14% -6%,rgba(91,45,130,.12),transparent 70%),linear-gradient(180deg,#1a1430 0%,#24183c 100%);color:#f4efe4;padding:16px 20px 12px}
+.wrap{max-width:88rem;margin:0 auto;padding:0 20px 64px}
+.shell .wrap{padding:0}
+header.top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.brand h1{margin:0;font-size:26px;letter-spacing:-.04em}
+.brand p{margin:4px 0 0;color:#cbbfd8;font-size:13px}
+.meta{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#cbbfd8}
+.meta b{color:#f4efe4;font-weight:500}
+.sports{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:6px}
+.sport{background:transparent;border:0;color:var(--mute);border-radius:10px;padding:10px 8px;min-height:52px;cursor:pointer;font-family:inherit}
+.sport small{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:3px;color:var(--faint)}
+.sport.on{background:#152038;color:#e4e0d4}
+.sport.on small{color:var(--gold)}
+.deskbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0 12px}
+.deskbar h2{margin:0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#5b2d82;font-family:"IBM Plex Mono",monospace}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{background:#fff;color:#6b675c;border:1px solid #ddd4c4;border-radius:999px;padding:8px 14px;min-height:40px;font-size:13px;cursor:pointer;font-family:inherit}
+.tab.on{background:#5b2d82;color:#fff;border-color:#5b2d82;font-weight:600}
+.banner,.kasper,.card{background:#fff;border:1px solid #e0d8c8;border-radius:14px;padding:14px 16px}
+.banner{margin-bottom:14px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.banner p,.lede,.sub,.why{color:#6b675c;font-size:14px;margin:0}
+.lede{margin:0 0 14px;max-width:80ch}
+.why{margin-top:8px;font-size:12px}
+.kasper{background:#f4efe4;margin-bottom:14px}
+.kasper h3{margin:0 0 10px;color:#5b2d82}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+.chip-gold{background:rgba(232,213,163,.14);color:var(--goldhi)}
+.chip-pine{background:rgba(125,154,120,.16);color:var(--pine)}
+.chip-brick{background:rgba(193,122,108,.16);color:var(--brick)}
+.chip-mute{background:rgba(228,224,212,.08);color:var(--mute)}
+.chip-amber{background:rgba(212,165,116,.16);color:var(--amber)}
+.grid{display:grid;gap:10px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden}
+th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7a7568;font-weight:500;padding:8px;border-bottom:1px solid #e8e0d4}
+td{padding:9px 8px;border-bottom:1px solid #f0eadf}
+.name-btn{background:none;border:0;padding:0;color:#5b2d82;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+.heat{display:inline-block;min-width:48px;text-align:center;border-radius:6px;padding:2px 6px;font-weight:600;font-size:12px}
+.h-g{background:#7d9a78;color:#fff}.h-y{background:#c4a574;color:#1c1408}.h-o{background:#d9894a;color:#fff}.h-r{background:#c17a6c;color:#fff}
+.modal-back{position:fixed;inset:0;background:rgba(26,20,48,.55);z-index:40;display:flex;align-items:center;justify-content:center;padding:20px}
+.hidden{display:none!important}
+.player-card{width:min(560px,100%);max-height:88vh;overflow:auto;background:#f4efe4;border-radius:16px;border:1px solid #d9d0c0;padding:18px}
+.player-card h2{margin:0;color:#5b2d82}
+.xbtn{background:#fff;border:1px solid #ddd4c4;border-radius:999px;width:36px;height:36px;cursor:pointer}
+@media(max-width:980px){.g3,.g2,.sports{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.g3,.g2,.sports{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="boot" id="boot"><p>Opening The Properating Room…</p></div>
-<script src="p1.js"></script>
-<script src="p2.js"></script>
-<script src="p3.js"></script>
+<div class="shell"><div class="wrap">
+  <header class="top">
+    <div class="brand"><h1>The Properating Room</h1><p>Consensus factory · live slate · no invented names · A+ stays isolated</p></div>
+    <div class="meta"><div>Slate <b>Mon 9/21</b></div><div>As of <b>6:20 PM CT</b></div><div>Pages <b>direct HTML</b></div></div>
+  </header>
+  <nav class="sports" id="sports"></nav>
+</div></div>
+<div class="wrap">
+  <div class="deskbar"><h2 id="deskTitle">Home Run Desk</h2><div class="tabs" id="tabs"></div></div>
+  <div class="banner" id="banner"></div>
+  <main id="main"></main>
+</div>
+<div class="modal-back hidden" id="playerModal"></div>
 <script>
-async function boot() {
-  try {
-    const raw = [window.ROOM_P1, window.ROOM_P2, window.ROOM_P3].map(s => String(s||"")).join("");
-    const b64 = raw.replace(/[^A-Za-z0-9+/=]/g, "");
-    const pad = b64 + "=".repeat((4 - (b64.length % 4)) % 4);
-    const bin = Uint8Array.from(atob(pad), c => c.charCodeAt(0));
-    const stream = new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"));
-    const html = await new Response(stream).text();
-    document.open();
-    document.write(html);
-    document.close();
-  } catch (err) {
-    document.getElementById("boot").innerHTML = "<p>Could not inflate the desk.</p><pre>" + String(err) + "</pre>";
-  }
+const MLB=id=>`https://www.mlbstatic.com/team-logos/team-cap-on-dark/${id}.svg`;
+const NFL=c=>`https://a.espncdn.com/i/teamlogos/nfl/500/${c}.png`;
+const TEAMS={TOR:141,BAL:110,WSH:120,DET:116,MIN:142,SF:137};
+const STATE={sport:"mlb",tab:"consensus"};
+const TABS={
+  mlb:[["consensus","Consensus"],["matchups","Matchups"],["games","Game Board"],["parlay","Parlay Card"],["cappers","Cappers"]],
+  nba:[["tickets","Tickets"]],
+  nfl:[["laser","Laser"],["week3","Week 3"]],
+  survivor:[["board","Board"],["chalk","Chalk"],["path","Path"]]
+};
+const PLAYERS=[
+  {last:"Eldridge",player:"Bryce Eldridge",team:"SF",game:"MIN@SF",src:3,sources:"Payoff · Barry · Venom",venom:"#7 · 64.8",kasper:"#3 stored",note:"Gold-row. SF lineup unposted.",flag:"OPEN"},
+  {last:"Alonso",player:"Pete Alonso",team:"BAL",game:"TOR@BAL",src:3,sources:"Payoff · Venom · Kasper",venom:"#1 · 77.1",kasper:"#1 source",note:"Homer #1 + Kasper #1. Game live/delayed.",flag:"LIVE"},
+  {last:"Torkelson",player:"Spencer Torkelson",team:"DET",game:"WSH@DET",src:3,sources:"Barry · Venom · Kasper",venom:"#19 · 53.6",kasper:"#2 source",note:"Barry + Homer #19 + Kasper #2.",flag:"LIVE"},
+  {last:"Mayo",player:"Coby Mayo",team:"BAL",game:"TOR@BAL",src:2,sources:"Payoff · Venom",venom:"#2 · 71.4",kasper:"—",note:"Homer #2. Payoff dash.",flag:"LIVE"},
+  {last:"Rodriguez",player:"Emmanuel Rodriguez",team:"MIN",game:"MIN@SF",src:2,sources:"Venom VALUE · Kasper",venom:"#81 VALUE · 74.7",kasper:"#2 source",note:"Homer VALUE #81 + Kasper #2. Posted 8-hole.",flag:"OPEN"},
+  {last:"Basallo",player:"Samuel Basallo",team:"BAL",game:"TOR@BAL",src:2,sources:"Barry · HRK",venom:"OVER #14",kasper:"—",note:"Homer #14 OVER — Venom dropped. Typed Barry + HRK still count.",flag:"LIVE"},
+  {last:"Clemens",player:"Kody Clemens",team:"MIN",game:"MIN@SF",src:2,sources:"Payoff · HRK",venom:"OVER #42",kasper:"—",note:"4-hole. Two typed tickets. Homer OVER — Venom does not credit.",flag:"OPEN"},
+  {last:"Okamoto",player:"Kazuma Okamoto",team:"TOR",game:"TOR@BAL",src:1,sources:"Payoff",venom:"#3 · 67.0",kasper:"—",note:"Homer #3. CROWD last-name book.",flag:"LIVE"},
+  {last:"Lile",player:"Daylen Lile",team:"WSH",game:"WSH@DET",src:1,sources:"Payoff",venom:"#5 · 58.8",kasper:"—",note:"Homer #5.",flag:"LIVE"},
+  {last:"Greene",player:"Riley Greene",team:"DET",game:"WSH@DET",src:1,sources:"Payoff",venom:"#8 · 56.9",kasper:"—",note:"Homer #8.",flag:"LIVE"},
+  {last:"Torres",player:"Gleyber Torres",team:"DET",game:"WSH@DET",src:2,sources:"Barry · Kasper",venom:"#61 not credited",kasper:"#1 source",note:"Barry + Kasper #1.",flag:"LIVE"},
+  {last:"Hill",player:"Turner Hill",team:"SF",game:"MIN@SF",src:1,sources:"Kasper",venom:"—",kasper:"#1 source",note:"Kasper #1 MIN@SF. Lineup unposted.",flag:"OPEN"},
+  {last:"Valencia",player:"Eduardo Valencia",team:"DET",game:"WSH@DET",src:1,sources:"Venom",venom:"#4 + Viper #1",kasper:"—",note:"18-game drought · 9.1% brl. Still one Venom source.",flag:"LIVE"},
+  {last:"Cowser",player:"Colton Cowser",team:"BAL",game:"TOR@BAL",src:1,sources:"Venom",venom:"#15 VALUE + Viper #2",kasper:"—",note:"15 games no HR · 0.0% brl. Fold only.",flag:"LIVE"},
+  {last:"Ortiz",player:"Abimelec Ortiz",team:"WSH",game:"WSH@DET",src:1,sources:"Venom",venom:"Viper #3",kasper:"—",note:"27-game drought. Viper #3 new credit.",flag:"LIVE"},
+  {last:"Guerrero",player:"Vladimir Guerrero Jr.",team:"TOR",game:"TOR@BAL",src:1,sources:"Kasper",venom:"—",kasper:"#2 SIT",note:"Kasper #2. Not in posted TOR 1-9. SIT.",flag:"SIT"}
+];
+function heat(n){return n>=3?"h-g":n===2?"h-y":n===1?"h-o":"h-r"}
+function logo(t){return TEAMS[t]?`<img alt="${t}" src="${MLB(TEAMS[t])}" style="width:18px;height:18px;vertical-align:middle"> `:""}
+function nameBtn(p){return `<button class="name-btn" data-player="${p.last}">${p.last}</button>`}
+function renderSports(){
+  const items=[["mlb","MLB","3-game slate"],["nba","NBA","LIVE OFF"],["nfl","NFL","W2 MNF NYG@LAR"],["survivor","Survivor","W2 TB died"]];
+  sports.innerHTML=items.map(([id,lab,sub])=>`<button class="sport ${STATE.sport===id?"on":""}" data-sport="${id}">${lab}<small>${sub}</small></button>`).join("");
+  sports.onclick=e=>{const b=e.target.closest("[data-sport]");if(!b)return;STATE.sport=b.dataset.sport;STATE.tab=TABS[STATE.sport][0][0];draw()};
 }
-boot();
+function renderTabs(){
+  deskTitle.textContent={mlb:"Home Run Desk",nba:"Prop Desk",nfl:"Injury + Blitz",survivor:"Survivor Path"}[STATE.sport];
+  tabs.innerHTML=TABS[STATE.sport].map(([id,lab])=>`<button class="tab ${STATE.tab===id?"on":""}" data-tab="${id}">${lab}</button>`).join("");
+  tabs.onclick=e=>{const b=e.target.closest("[data-tab]");if(!b)return;STATE.tab=b.dataset.tab;draw()};
+}
+function viewMLB(){
+  if(STATE.tab==="matchups") return `<div class="kasper"><h3>Matchups</h3><p class="lede">Kasper 3/game. Rank 1-2 are sources. Rank 3 stored. 0 A+.</p>
+    <table><thead><tr><th>Game</th><th>#1</th><th>#2</th><th>#3 stored</th></tr></thead><tbody>
+    <tr><td>TOR@BAL</td><td>Alonso 76.7</td><td>Guerrero 65.3 SIT</td><td>Beavers 63.6</td></tr>
+    <tr><td>WSH@DET</td><td>Torres 77.4</td><td>Torkelson 73.4</td><td>Wood 71.4</td></tr>
+    <tr><td>MIN@SF</td><td>Hill 62.9</td><td>Rodriguez 58.8</td><td>Eldridge 57.6</td></tr>
+    </tbody></table></div>`;
+  if(STATE.tab==="games") return `<div class="kasper"><h3>Game Board</h3><p class="lede">Minimum two plays per game. Vault is display only.</p>
+    <div class="grid g3">
+      <div class="card"><div class="chip chip-brick">DELAYED</div><h3>TOR @ BAL</h3><p class="why">Alonso · Mayo · Okamoto</p></div>
+      <div class="card"><div class="chip chip-brick">LIVE</div><h3>WSH @ DET</h3><p class="why">Torkelson · Torres · Lile · Greene</p></div>
+      <div class="card"><div class="chip chip-pine">PRE-GAME</div><h3>MIN @ SF</h3><p class="why">Eldridge · Rodriguez · Clemens · Hill</p></div>
+    </div></div>`;
+  if(STATE.tab==="parlay") return `<div class="kasper"><h3>Parlay Card</h3><p class="lede">Gold-row is Eldridge. Clemens stays from two typed tickets even though Homer tagged OVER.</p>
+    <div class="grid g2"><div class="card"><div class="chip chip-mute">NIGHT CORE</div><p class="why">Eldridge · Rodriguez · Clemens · Bericoto. Live leftovers only for grading.</p></div>
+    <div class="card"><div class="chip chip-mute">DO NOT COPY BLINDLY</div><p class="why">HRK already posted Basallo+Clemens+Lee and CES+Clemens+Wood.</p></div></div></div>`;
+  if(STATE.tab==="cappers") return `<div class="kasper"><h3>Season-to-date cappers</h3>
+    <table><thead><tr><th>Handle</th><th>Today</th><th>Weight</th></tr></thead><tbody>
+    <tr><td>@PayoffBetsMLB</td><td>7 dashed locks</td><td>Equal</td></tr>
+    <tr><td>@parlaybarry</td><td>6 juice · 2 SIT</td><td>Equal</td></tr>
+    <tr><td>@TheHome_RunKing</td><td>5 ticket names</td><td>Equal</td></tr>
+    <tr><td>@KasperMLB</td><td>#1+#2 sourced</td><td>Equal</td></tr>
+    <tr><td>@jakevenomapp</td><td>Homer + Viper Ortiz</td><td>Equal</td></tr>
+    </tbody></table></div>`;
+  const rows=[...PLAYERS].sort((a,b)=>b.src-a.src);
+  return `<div class="kasper"><h3>Common Names Consensus</h3>
+    <p class="lede">Source count is the heat. OVER names have no Venom chip. Gold-row is Eldridge. 0 A+.</p>
+    <div class="chips" style="margin-bottom:12px">
+      <span class="chip chip-pine">3-src Eldridge · Alonso · Torkelson</span>
+      <span class="chip chip-amber">Vault posted · not credited</span>
+      <span class="chip chip-mute">0 A+</span>
+    </div>
+    <table><thead><tr><th>Hitter</th><th>Game</th><th>Src</th><th>Sources</th><th>Venom</th><th>Kasper</th><th>Flag</th></tr></thead>
+    <tbody>${rows.map(p=>`<tr>
+      <td>${logo(p.team)}${nameBtn(p)} · ${p.team}</td><td>${p.game}</td>
+      <td><span class="heat ${heat(p.src)}">${p.src}</span></td>
+      <td>${p.sources}</td><td>${p.venom}</td><td>${p.kasper}</td><td>${p.flag}</td>
+    </tr>`).join("")}</tbody></table></div>`;
+}
+function viewOther(){
+  if(STATE.sport==="nba") return `<div class="kasper"><h3>Prop Desk</h3><p class="lede">No NBA games Monday 9/21. Preseason opens October. WNBA tape is parked off this desk.</p></div>`;
+  if(STATE.sport==="nfl"&&STATE.tab==="week3") return `<div class="kasper"><h3>Week 3 slate</h3><p class="lede">Do not spend BUF / DET / DEN / BAL / LAR without a written reason. TNF is ATL @ GB.</p></div>`;
+  if(STATE.sport==="nfl") return `<div class="kasper"><h3>Monday Night</h3><p class="lede">Giants (1-0) at Rams (0-1), 8:15 ET, SoFi. Last W2 game. A laser is a model-vs-market gap, not a tweet.</p>
+    <div class="grid g2"><div class="card"><img src="${NFL("nyg")}" width="28"><strong> Giants</strong><p class="why">Road MNF after a short week is the fade case, not a lock.</p></div>
+    <div class="card"><img src="${NFL("lar")}" width="28"><strong> Rams</strong><p class="why">Home get-right after Australia. Line not stable enough to laser without your sheet.</p></div></div></div>`;
+  if(STATE.tab==="chalk") return `<div class="kasper"><h3>Chalk</h3><p class="lede">Splash W2 dead — TB 29.3%. 48.6% of that field gone. SF cashed 35-13 vs MIA.</p></div>`;
+  if(STATE.tab==="path") return `<div class="kasper"><h3>Path</h3><p class="lede">W3 TNF is ATL @ GB. Do not double-up SF if you already spent it. Circa should not go 100% GB.</p></div>`;
+  return `<div class="kasper"><h3>Survivor Board</h3><p class="lede">Week 2 is closed after MNF. Live question is what you burned and what Week 3 still owes you.</p>
+    <div class="grid g3">
+      <div class="card"><div class="chip chip-brick">W2 DEATH</div><h3>Buccaneers</h3><p class="why">29.3% of Splash. Cody FV on TB was 22.</p></div>
+      <div class="card"><div class="chip chip-pine">W2 CASH</div><h3>49ers</h3><p class="why">Public co-chalk that actually won.</p></div>
+      <div class="card"><div class="chip chip-amber">W3 BUTTON</div><h3>Packers -6.5</h3><p class="why">TNF vs ATL. Office pools flock here.</p></div>
+    </div></div>`;
+}
+function openPlayer(last){
+  const p=PLAYERS.find(x=>x.last===last); if(!p) return;
+  playerModal.innerHTML=`<div class="player-card"><header style="display:flex;justify-content:space-between;align-items:flex-start">
+    <div><h2>${p.player}</h2><p class="sub">${p.team} · ${p.game}</p></div>
+    <button class="xbtn" data-close="1">✕</button></header>
+    <div class="chips" style="margin:12px 0"><span class="chip chip-gold">SRC ${p.src}</span><span class="chip chip-mute">${p.flag}</span></div>
+    <table><tbody>
+      <tr><td>Sources</td><td>${p.sources}</td></tr>
+      <tr><td>Venom</td><td>${p.venom}</td></tr>
+      <tr><td>Kasper</td><td>${p.kasper}</td></tr>
+    </tbody></table>
+    <p class="why">${p.note}</p></div>`;
+  playerModal.classList.remove("hidden");
+}
+function draw(){
+  renderSports(); renderTabs();
+  banner.innerHTML=STATE.sport==="mlb"
+    ? `<div><p><strong>Night mode.</strong> TOR@BAL delayed · WSH@DET live · MIN@SF is the only unstarted card. Gold-row max: <strong>Eldridge</strong>.</p></div>
+       <div class="chips"><span class="chip chip-amber">2 live / delayed</span><span class="chip chip-pine">Vault posted · not credited</span><span class="chip chip-mute">0 A+</span></div>`
+    : `<div><p>Desk is live on GitHub Pages. Hard-refresh if you still see a cached 404.</p></div>`;
+  main.innerHTML=STATE.sport==="mlb"?viewMLB():viewOther();
+  document.querySelectorAll("[data-player]").forEach(btn=>btn.onclick=e=>{e.preventDefault();openPlayer(btn.dataset.player)});
+}
+playerModal.onclick=e=>{if(e.target===playerModal||e.target.dataset.close)playerModal.classList.add("hidden")};
+document.onkeydown=e=>{if(e.key==="Escape")playerModal.classList.add("hidden")};
+draw();
 </script>
 </body>
 </html>
