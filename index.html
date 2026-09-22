@@ -112,16 +112,17 @@ footer.foot{margin-top:22px;color:var(--faint);font-size:12px;font-family:"IBM P
         return r.text();
       });
     }));
+    const patch=await fetch('desk-patch.js?d=922v2b').then(function(r){
+      if(!r.ok) throw new Error('missing desk-patch ('+r.status+')');
+      return r.text();
+    });
     const b64=parts.join('').replace(/\s+/g,'');
     const bin=atob(b64);
     const bytes=Uint8Array.from(bin, function(c){ return c.charCodeAt(0); });
     const text=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
     const s=document.createElement('script');
-    s.textContent=text;
+    s.textContent=text+'\n'+patch;
     document.body.appendChild(s);
-    const p=document.createElement('script');
-    p.src='desk-patch.js?d=922v2';
-    document.body.appendChild(p);
   }catch(e){
     if(box) box.innerHTML='<section class="block"><p class="warn">Desk failed to load: '+String(e.message||e)+'. Hard-refresh this same URL.</p></section>';
     console.error(e);
