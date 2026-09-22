@@ -8,6 +8,7 @@
   html,body{margin:0;background:#1a1430;color:#f4efe4;font-family:system-ui,sans-serif}
   .boot{padding:28px 24px;max-width:40rem}
   .boot p{color:#cbbfd8}
+  pre{white-space:pre-wrap;color:#e8d5a3;font-size:12px}
 </style>
 </head>
 <body>
@@ -18,8 +19,10 @@
 <script>
 async function boot() {
   try {
-    const b64 = window.ROOM_P1 + window.ROOM_P2 + window.ROOM_P3;
-    const bin = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const raw = [window.ROOM_P1, window.ROOM_P2, window.ROOM_P3].map(s => String(s||"")).join("");
+    const b64 = raw.replace(/[^A-Za-z0-9+/=]/g, "");
+    const pad = b64 + "=".repeat((4 - (b64.length % 4)) % 4);
+    const bin = Uint8Array.from(atob(pad), c => c.charCodeAt(0));
     const stream = new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"));
     const html = await new Response(stream).text();
     document.open();
