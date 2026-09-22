@@ -1,7 +1,9 @@
 # The Properating Room
 
-Live: https://pauldcross2-design.github.io/properating-room/
+Live: https://pauldcross2-design.github.io/properating-room/?v=922-close-v1
 
-Snapshot: Monday 9/21 9:00 AM CT rewind (hold on). Lineups unposted, Venom unposted, 0 A+. Tape only from Payoff 6:40 / Barry 6:53 / HRK overnight / Kasper video.
+9/22 close desk. Persist `922-close-v1` as of 3:21 PM CT.
 
-Hard-refresh (Ctrl+Shift+R / Cmd+Shift+R) if a cached page is still showing.
+Landed: StatsAPI slate + official 1-9s, Venom Homer/Viper/Edge, Kasper 15 cards, SportsPredict A+ (4 live HR).
+Waiting: Payoff sheet, Barry juice. No published ticket.
+Weather source of record: [@BallparkPal](https://x.com/BallparkPal).
