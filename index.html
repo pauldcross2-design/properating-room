@@ -3,141 +3,143 @@
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>The Properating Room</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-:root{--mute:#5b564c;--faint:#8a8478;--goldhi:#6e5424;--line:rgba(40,32,18,.14)}
-*{box-sizing:border-box}html,body{margin:0;background:#f3eee2;color:#1c1914;font-family:"IBM Plex Sans",sans-serif}
-body{background:linear-gradient(180deg,#f7f2e6,#efe8d8);min-height:100vh}
-.wrap{max-width:88rem;margin:0 auto;padding:0 16px 64px}
-header.top{padding:18px 16px 8px}.top-inner{max-width:88rem;margin:0 auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-h1{margin:0;font-size:26px;color:#5c4318}p{margin:4px 0 0;color:var(--mute);font-size:13px}
-.meta{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-align:right}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
-.tab{background:#fffdf8;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer;color:var(--mute)}
-.tab.on{background:#c4a046;color:#1c1408;font-weight:600}
-.banner,.card{background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 12px}
-.lede,.why{color:var(--mute);font-size:13px;line-height:1.45}
-.chip{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-right:4px;display:inline-block;margin-bottom:4px}
-.chip-gold{background:#f3e3b0;color:#6e5424}.chip-pine{background:#d7e8c8;color:#2f5a28}.chip-brick{background:#f3d4cc;color:#8a3328}.chip-amber{background:#f4dfb8;color:#8a5a18}.chip-mute{background:#efe8d8}
-table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:7px 6px;border-bottom:1px solid rgba(40,32,18,.08);text-align:left;vertical-align:top}
-th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-.grid{display:grid;gap:10px}.g2{grid-template-columns:repeat(2,1fr)}
-.muted{color:var(--faint);font-size:12px}h3{margin:0 0 8px;color:var(--goldhi);font-size:15px}
-.panel{display:none}.panel.on{display:block}
-@media(max-width:800px){.g2{grid-template-columns:1fr}.meta{text-align:left}}
-</style></head>
+  :root {
+    --bg: #070b14; --navy: #0e1730; --card: #121c38; --gold: #d4af37; --gold2: #f3d57a;
+    --green: #3dd68c; --blue: #5aa7ff; --red: #ff6b6b; --muted: #8b97b3; --text: #f4f6fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "Segoe UI", system-ui, sans-serif; color: var(--text);
+    background:
+      radial-gradient(900px 280px at 20% -10%, rgba(243,213,122,.18), transparent 55%),
+      radial-gradient(700px 240px at 85% -5%, rgba(255,255,255,.07), transparent 50%),
+      var(--bg);
+    padding: 16px 12px 48px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  .hdr { border: 1px solid rgba(212,175,55,.45); background: linear-gradient(180deg, #182448, #0d152c); border-radius: 16px; padding: 16px 18px 14px; margin-bottom: 14px; }
+  .kicker { color: var(--gold); letter-spacing: .18em; font-size: 11px; font-weight: 700; }
+  h1 { margin: 6px 0 4px; font-size: 28px; background: linear-gradient(180deg, #fff6c8, #d4af37); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--muted); font-size: 13px; line-height: 1.4; }
+  h2 { margin: 18px 0 8px; font-size: 13px; letter-spacing: .14em; color: var(--gold2); text-transform: uppercase; }
+  .grid { display: grid; gap: 8px; }
+  .g2 { grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .g2 { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--card); border: 1px solid rgba(212,175,55,.35); border-radius: 14px; padding: 10px 12px; }
+  .name { font-weight: 800; font-size: 15px; }
+  .meta { color: var(--muted); font-size: 11px; margin-top: 3px; line-height: 1.35; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; padding: 2px 6px; border-radius: 999px; margin-right: 4px; }
+  .gold { background: rgba(212,175,55,.2); color: var(--gold2); }
+  .green { background: rgba(61,214,140,.16); color: var(--green); }
+  .blue { background: rgba(90,167,255,.16); color: var(--blue); }
+  .fade { background: rgba(255,107,107,.14); color: var(--red); }
+  .crowd { background: rgba(243,213,122,.12); color: var(--gold2); }
+  .game { display: grid; grid-template-columns: 108px 1fr; gap: 8px; align-items: start; }
+  .when { color: var(--gold2); font-size: 11px; font-weight: 700; }
+  .vs { font-size: 12px; font-weight: 800; }
+  .src { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .ok { color: var(--green); } .miss { color: #6b7388; } .warn { color: #ffb347; }
+  .legs { color: var(--muted); font-size: 12px; margin-top: 4px; line-height: 1.45; }
+  footer { margin-top: 16px; color: #6b7388; font-size: 11px; line-height: 1.45; }
+  .dead { opacity: .55; }
+</style>
+</head>
 <body>
-<header class="top"><div class="top-inner">
-<div>
-  <h1>The Properating Room</h1>
-  <p>Sat 9/26 house board plus kHR tape. Cruz and Emmanuel are out. NYM and PIT are live.</p>
-</div>
-<div class="meta">
-  <div>Slate <b>Sat 9/26</b></div>
-  <div>As of <b>1:05 PM CT</b></div>
-  <div>Persist <b>926-khr-v1</b></div>
-</div>
-</div></header>
 <div class="wrap">
-<div class="banner">
-  <p><strong>Typed board, then a kHR check.</strong> SportsPredict slate numbers are tape. They do not mint A+. NYM @ WSH is live, end of the 5th, 0–1, no homers. PIT @ DET is live, bottom 3rd, 0–0. Oneil Cruz is out of the PIT card. Emmanuel Rodriguez is out of the MIN card.</p>
-  <p class="why">StatsAPI still has Yates, Eovaldi, Suter, Ralston, and Wesneski. The pasted slate dropped several of those arms. Do not call a scratch off a blank cell. AZ probable is still blank. Goodman is the COL kHR leader and stays OVER-parked.</p>
-  <div>
-    <span class="chip chip-pine">Venom 1–20</span>
-    <span class="chip chip-pine">Viper</span>
-    <span class="chip chip-pine">SP A+</span>
-    <span class="chip chip-pine">Kasper</span>
-    <span class="chip chip-pine">Payoff</span>
-    <span class="chip chip-brick">Cruz out</span>
-    <span class="chip chip-brick">Emmanuel out</span>
-    <span class="chip chip-amber">kHR tape</span>
+  <div class="hdr">
+    <div class="kicker">HOUSE BOARD · FINAL WEEKEND</div>
+    <h1>The Properating Room</h1>
+    <div class="sub">Sat 9/26 · published 2:05 PM CT · persist 926-pub-v1<br>Typed tickets, then the live card. Lowe has homered. Cruz is out. Emmanuel is out. kHR is tape, not A+.</div>
   </div>
-</div>
-<div class="tabs">
-  <button class="tab on" data-p="consensus">Consensus</button>
-  <button class="tab" data-p="games">Game Board</button>
-  <button class="tab" data-p="parlay">Parlay Card</button>
-</div>
 
-<section class="panel on" id="consensus">
-<div class="card"><span class="chip chip-gold">LAYER A PLAYABLE</span>
-<table><thead><tr><th>Hitter</th><th>Spot</th><th>Tag</th><th>Lineup</th></tr></thead><tbody>
-<tr><td>Brandon Lowe PIT</td><td>vs Verlander · 1:10 ET</td><td>V1 VALUE · SP A+ 23.4% · Venom 89.1</td><td>Posted PIT 2</td></tr>
-<tr><td>Elly De La Cruz CIN</td><td>vs Yesavage · 3:07 ET</td><td>GOLD · V2 VALUE · only gold name in Venom top 5</td><td>Posted CIN 2</td></tr>
-<tr><td>Munetaka Murakami CWS</td><td>vs Quintana · 7:10 ET</td><td>V3 · GOATed 25% · CashMan 27%</td><td>Unposted</td></tr>
-<tr><td>Jake Bauers MIL</td><td>vs Mathews · 7:10 ET</td><td>V4 · barrel pulse · LaFemillie star</td><td>Unposted</td></tr>
-<tr><td>Francisco Alvarez NYM</td><td>vs Early · 12:35 ET</td><td>V5 VALUE · first wave · Kasper barrel</td><td>Posted NYM 7. Warmup.</td></tr>
-<tr><td>Shohei Ohtani LAD</td><td>vs Wilkinson · 4:05 ET</td><td>V6 DUE · Viper 66.7% brl · 15 without</td><td>Unposted</td></tr>
-<tr><td>Eduardo Valencia DET</td><td>vs Yates · 1:10 ET</td><td>V8 VALUE · Viper · SP TB A+</td><td>Posted DET 4</td></tr>
-<tr><td>Thomas Saggese STL</td><td>vs May · 7:10 ET</td><td>V11 VALUE · Viper 25% brl · 18 without · +800</td><td>Unposted</td></tr>
-</tbody></table>
-<p class="muted">Carter Jensen is GOLD and SP A+ 22.1%, but Venom 209. Crowd only. kHR does not have him in the KC top 3. Oneil Cruz was SP A+ 22.5% and is now out of the PIT 1–9. Jake Mangum is batting fourth. Emmanuel Rodriguez is out of the MIN 1–9.</p>
-</div>
+  <h2>Layer A playable</h2>
+  <div class="grid g2">
+    <div class="card dead">
+      <div class="name">Brandon Lowe <span class="tag green">CASHED</span></div>
+      <div class="meta">PIT 2, vs Verlander. 1 HR already. Game is top 6, PIT 2–0. V1 is off the remaining board.</div>
+    </div>
+    <div class="card">
+      <div class="name">Elly De La Cruz <span class="tag gold">GOLD</span><span class="tag gold">V2 VALUE</span></div>
+      <div class="meta">CIN 2 vs Yesavage. Warmup. Only gold-row straight. Roof.</div>
+    </div>
+    <div class="card">
+      <div class="name">Munetaka Murakami <span class="tag gold">V3</span></div>
+      <div class="meta">Posted CWS 4 vs Quintana. 7:10 ET. GOATed 25% · CashMan 27%.</div>
+    </div>
+    <div class="card">
+      <div class="name">Jake Bauers <span class="tag gold">V4</span></div>
+      <div class="meta">STL @ MIL still blank. vs Mathews, 7:10 ET. Roof.</div>
+    </div>
+    <div class="card dead">
+      <div class="name">Francisco Alvarez <span class="tag fade">LIVE LATE</span></div>
+      <div class="meta">NYM 7. Game is top 9, NYM 7–1. No homer. Ewing and Mauricio (2) have homered.</div>
+    </div>
+    <div class="card">
+      <div class="name">Shohei Ohtani <span class="tag green">V6 DUE</span><span class="tag green">VIPER</span></div>
+      <div class="meta">Posted LAD 2 vs Wilkinson. 4:05 ET. kHR only 61.3. Betts is 1.</div>
+    </div>
+    <div class="card dead">
+      <div class="name">Eduardo Valencia <span class="tag green">LIVE</span></div>
+      <div class="meta">DET 4, no homer through top 6. Viper / SP TB A+. Tape now.</div>
+    </div>
+    <div class="card">
+      <div class="name">Thomas Saggese <span class="tag green">V11 VALUE</span><span class="tag green">VIPER</span></div>
+      <div class="meta">STL @ MIL still blank. vs May. 25% brl · 18 without.</div>
+    </div>
+    <div class="card">
+      <div class="name">Carter Jensen <span class="tag gold">GOLD</span><span class="tag crowd">CROWD</span></div>
+      <div class="meta">Posted KC 1 vs Bibee. Venom 209. Not a Layer A straight. Pasquantino is KC 5. CLE still blank.</div>
+    </div>
+    <div class="card dead">
+      <div class="name">Oneil Cruz <span class="tag fade">OUT</span></div>
+      <div class="meta">Not on the PIT card. Mangum is batting fourth. Every Cruz leg is dead.</div>
+    </div>
+  </div>
 
-<div class="card"><span class="chip chip-gold">COMMON NAMES</span>
-<table><thead><tr><th>Tier</th><th>Batter</th><th>Sources</th></tr></thead><tbody>
-<tr><td>GOLD 6+</td><td>Elly De La Cruz CIN</td><td>Kasper · POTD · Payoff · LaFemillie · Zone · bbrown · HRKing</td></tr>
-<tr><td>GOLD 6+</td><td>Eugenio Suárez CIN</td><td>Kasper · POTD · Payoff · LaFemillie · Zone · bbrown</td></tr>
-<tr><td>GOLD 6+</td><td>Carter Jensen KC</td><td>Kasper · POTD · Payoff · Zone · rudebets · bbrown</td></tr>
-<tr><td>GOLD 6+</td><td>Alec Burleson STL</td><td>Kasper · POTD · Payoff · LaFemillie · Zone · rudebets</td></tr>
-<tr><td>GREEN 5</td><td>Oneil Cruz PIT</td><td>Kasper · POTD · LaFemillie · Zone · bbrown</td></tr>
-<tr><td>GREEN 5</td><td>Yordan Alvarez HOU</td><td>Kasper · POTD · Payoff · Zone · bbrown</td></tr>
-<tr><td>GREEN 5</td><td>Munetaka Murakami CWS</td><td>Kasper · POTD · Payoff · Zone · HRPredict</td></tr>
-<tr><td>GREEN 5</td><td>Kyle Schwarber PHI</td><td>Kasper · POTD · Payoff · Zone · HRPredict</td></tr>
-<tr><td>BLUE 4</td><td>Jake Bauers MIL</td><td>Kasper · POTD · Payoff · LaFemillie</td></tr>
-<tr><td>BLUE 4</td><td>Spencer Torkelson DET</td><td>Payoff · LaFemillie · Zone · Kalshi ticket</td></tr>
-<tr><td>BLUE 4</td><td>Randal Grichuk CWS</td><td>Kasper · POTD · Payoff · HRKing</td></tr>
-</tbody></table>
-<p class="muted">Scanned: Kasper, POTDJay, Payoff, LaFemillie, Zone, rudebets, bbrown, Home Run King, HomeRunPredict, CashMan, GOATed. Dark: jakevenomapp, Joey, ParlayBarry, Charm, BarrelLab, DFS Donuts. Venom 1–20 and Viper are in the Layer A tape. Full Venom dump is not on this page.</p>
-</div>
-</section>
+  <h2>Common names</h2>
+  <div class="card">
+    <div class="legs">
+      <span class="tag gold">GOLD</span> Elly, posted CIN 2 · Suárez, posted CIN 4 · Jensen, posted KC 1, crowd only · Burleson, lineup still blank<br>
+      <span class="tag green">GREEN</span> Cruz OUT · Yordan, HOU blank · Murakami, posted CWS 4 · Schwarber, PHI blank<br>
+      <span class="tag blue">BLUE</span> Bauers, blank · Torkelson, DET 7, game live, no homer · Grichuk, posted CWS 3
+    </div>
+    <div class="meta" style="margin-top:8px">Emmanuel Rodriguez is out of the MIN 1–9. Seager is posted TEX 3. Olson ATL 3 and Baldwin ATL 4 are posted.</div>
+  </div>
 
-<section class="panel" id="games">
-<p class="lede">Top 2 on games that have not started. Live games are tape. kHR is the SportsPredict matchup number, not a new source.</p>
-<div class="grid g2">
-<div class="card"><span class="chip chip-mute">LIVE 0–1 END 5</span><h3>NYM @ WSH</h3><p class="why">Tong vs Early. Alvarez still 7, Soto still 2. No homer yet. kHR had Soto 86.2, Wood 68.6, Lindor 65.6. Alvarez was not in that top 3.</p></div>
-<div class="card"><span class="chip chip-mute">LIVE 0–0 B3</span><h3>PIT @ DET</h3><p class="why">Yates vs Verlander. Lowe still PIT 2, no homer. Cruz is OUT. Valencia DET 4, Torkelson DET 7. kHR top 3 is Valencia 74.2, McGonigle, Torkelson. Lowe is not in it. PIT stack is dead.</p></div>
-<div class="card"><h3>CIN @ TOR 3:07 ET</h3><p class="why">Lowder vs Yesavage. Posted. 1 Elly CIN 2, the gold straight. 2 Suárez CIN 4. kHR agrees: Stewart 70.7, Elly 69.1, Suárez 67.7. Stewart is tape, not a typed top-2.</p></div>
-<div class="card"><h3>LAD @ SF 4:05 ET</h3><p class="why">Snell vs Wilkinson. Posted. Betts 1, Ohtani 2. kHR is soft: Ohtani 61.3, Turner Hill 60.0, Betts 59.7. Oracle stays a poor HR park.</p></div>
-<div class="card"><span class="chip chip-brick">RAIN</span><h3>TEX @ MIN 4:10 ET</h3><p class="why">Eovaldi vs Ober. Both posted. Seager TEX 3. Emmanuel is OUT. kHR’s next bats who are actually in: Clemens MIN 3. Jeffers is not in the MIN 1–9. Rain and wind-in note still stands.</p></div>
-<div class="card"><span class="chip chip-gold">WX</span><h3>ATL @ MIA 4:10 ET</h3><p class="why">Suter vs Ralston. Both posted. Olson ATL 3, Baldwin ATL 4. Acuña is 2, Riley is 5. kHR prefers Olson 82.1, Riley 77.0, Acuña 74.3 over Baldwin.</p></div>
-<div class="card"><h3>CLE @ KC 7:10 ET</h3><p class="why">Bibee vs Wacha. Still blank. Typed 1 Jensen, crowd only. 2 Pasquantino. kHR is Pasquantino 79.6, Ramírez, Witt. Jensen is not in the top 3. Kauffman +6.1%.</p></div>
-<div class="card"><h3>COL @ CWS 7:10 ET</h3><p class="why">Quintana vs Martin. COL posted, CWS blank. Murakami and Grichuk are not confirmed. kHR top 3 is all Rockies: Goodman 63.1, Moniak, Rumfield. Goodman stays OVER-parked. Moniak is COL 7.</p></div>
-<div class="card"><h3>STL @ MIL 7:10 ET</h3><p class="why">Mathews vs May. Still blank. Typed 1 Bauers. 2 Burleson, crowd. kHR is Bauers 65.3, Bernal, Sánchez. Burleson is not in the top 3. Roof.</p></div>
-<div class="card"><span class="chip chip-brick">WIND</span><h3>TB @ PHI 7:15 ET</h3><p class="why">Jax vs TBA. Still blank. Typed 1 Schwarber. 2 Aranda. kHR is the TB side: Aranda 68.3, Caminero, Díaz. Schwarber is not in the top 3. 23 mph in.</p></div>
-<div class="card"><h3>AZ @ SD 8:40 ET</h3><p class="why">Buehler only. AZ arm still blank. Unposted. Typed 1 Tatis. 2 Carroll. kHR is Merrill 76.7, Machado 76.3, Tatis 75.1. Carroll is not in the top 3.</p></div>
-<div class="card"><span class="chip chip-gold">BEST WX</span><h3>HOU @ ATH 9:40 ET</h3><p class="why">Wesneski vs Perkins. Unposted. Typed 1 Yordan. 2 Gelof. kHR is Yordan 86.2, Langeliers 67.3, Paredes 67.3. Gelof is not in the top 3. Sutter +10.9%.</p></div>
-<div class="card"><span class="chip chip-brick">FADE</span><h3>LAA @ SEA 9:40 ET</h3><p class="why">Johnson vs Anderson. Unposted. Typed 1 Trout, the slate’s top bat at 88.8. 2 Raleigh, and kHR has him second at 66.6. Fade the SEA side anyway. Ward is the third kHR name.</p></div>
-</div>
-</section>
+  <h2>Game board · still ahead</h2>
+  <div class="grid">
+    <div class="card game dead"><div><div class="when">LIVE T9</div><div class="vs">NYM 7 @ WSH 1</div></div><div><div class="name">Alvarez no HR</div><div class="meta">Soto no HR. Mauricio 2, Ewing 1. Off the board.</div></div></div>
+    <div class="card game dead"><div><div class="when">LIVE T6</div><div class="vs">PIT 2 @ DET 0</div></div><div><div class="name">Lowe cashed</div><div class="meta">Cruz out. Valencia and Torkelson still 0. Gonzalez also homered.</div></div></div>
+    <div class="card game"><div><div class="when">WARMUP</div><div class="vs">CIN @ TOR</div></div><div><div class="name">Elly <span class="tag gold">GOLD</span></div><div class="name">Suárez <span class="tag crowd">CROWD</span></div><div class="meta">Lowder / Yesavage. Both posted, 2 and 4. kHR also likes Stewart, who is batting 3.</div></div></div>
+    <div class="card game"><div><div class="when">4:05 ET</div><div class="vs">LAD @ SF</div></div><div><div class="name">Ohtani</div><div class="name">Betts</div><div class="meta">Snell / Wilkinson. Posted 2 and 1. kHR is soft, 61 / 60 / 60. Poor HR park.</div></div></div>
+    <div class="card game"><div><div class="when">4:10 ET</div><div class="vs">TEX @ MIN</div></div><div><div class="name">Seager</div><div class="name">Rodriguez <span class="tag fade">OUT</span></div><div class="meta">Eovaldi / Ober. Rain 66%, wind in. Clemens is the kHR bat who is actually in.</div></div></div>
+    <div class="card game"><div><div class="when">4:10 ET</div><div class="vs">ATL @ MIA</div></div><div><div class="name">Olson</div><div class="name">Baldwin</div><div class="meta">Suter / Ralston. Posted 3 and 4. kHR prefers Riley and Acuña, who are 5 and 2.</div></div></div>
+    <div class="card game"><div><div class="when">7:10 ET</div><div class="vs">CLE @ KC</div></div><div><div class="name">Jensen <span class="tag crowd">CROWD</span></div><div class="name">Pasquantino</div><div class="meta">Bibee / Wacha. KC posted, CLE blank. Jensen KC 1, Pasquantino KC 5. Kauffman +6.1%.</div></div></div>
+    <div class="card game"><div><div class="when">7:10 ET</div><div class="vs">COL @ CWS</div></div><div><div class="name">Murakami</div><div class="name">Grichuk</div><div class="meta">Quintana / Martin. Both posted, CWS 4 and CWS 3. Wind in. Goodman stays parked.</div></div></div>
+    <div class="card game"><div><div class="when">7:10 ET</div><div class="vs">STL @ MIL</div></div><div><div class="name">Bauers</div><div class="name">Burleson <span class="tag crowd">CROWD</span></div><div class="meta">Mathews / May. Both sides blank. Roof. Saggese is the Viper, not the top 2.</div></div></div>
+    <div class="card game"><div><div class="when">7:15 ET</div><div class="vs">TB @ PHI</div></div><div><div class="name">Schwarber <span class="tag crowd">CROWD</span></div><div class="name">Aranda</div><div class="meta">Jax / TBA. Both blank. 23 mph in. kHR is the TB side, not Schwarber.</div></div></div>
+    <div class="card game"><div><div class="when">8:40 ET</div><div class="vs">AZ @ SD</div></div><div><div class="name">Tatis</div><div class="name">Carroll</div><div class="meta">Buehler only. AZ arm not confirmed. Both blank. kHR is Merrill, Machado, Tatis.</div></div></div>
+    <div class="card game"><div><div class="when">9:40 ET</div><div class="vs">HOU @ ATH</div></div><div><div class="name">Yordan <span class="tag crowd">CROWD</span></div><div class="name">Gelof</div><div class="meta">Wesneski / Perkins. Both blank. Sutter +10.9%, best weather. kHR also has Langeliers and Paredes.</div></div></div>
+    <div class="card game"><div><div class="when">9:40 ET</div><div class="vs">LAA @ SEA</div></div><div><div class="name">Trout</div><div class="name">Raleigh <span class="tag fade">FADE SEA</span></div><div class="meta">Johnson / Anderson. Both blank. Trout is the slate’s top kHR bat at 88.8. Roof, env −26%.</div></div></div>
+  </div>
 
-<section class="panel" id="parlay">
-<p class="lede">Typed grid. One gold straight, and it is Elly. Jensen is not on the five straights. SEA names are off the legs. Lab of the typed tickets, not a new ticket.</p>
-<div class="grid g2">
-<div class="card"><span class="chip chip-gold">5 STRAIGHTS</span>
-<p class="why">Lowe · still PIT 2, game is live<br>Elly · posted CIN 2 · the only gold straight<br>Murakami · CWS still blank<br>Bauers · still blank<br>F. Alvarez · posted NYM 7 · game is live, no homer</p></div>
-<div class="card"><span class="chip chip-gold">3 TWO-LEG</span>
-<p class="why">Lowe + Elly. Elly is still ahead. Lowe’s game is live.<br>Murakami + Bauers. Both unposted.<br>Lowe + Cruz. Dead. Cruz is out of the PIT card.</p></div>
-<div class="card"><span class="chip chip-gold">3 THREE-LEG</span>
-<p class="why">Lowe + Elly + Murakami.<br>Bauers + Alvarez + Ohtani.<br>Jensen + Yordan + Grichuk. Crowd and green names. Jensen is not Layer A.</p></div>
-<div class="card"><span class="chip chip-gold">3 FOUR-LEG</span>
-<p class="why">Lowe + Elly + Murakami + Bauers.<br>Alvarez + Jensen + Yordan + Ohtani. Alvarez is live.<br>Suárez + Gelof + Saggese. Cruz is off this leg.</p></div>
-<div class="card"><span class="chip chip-gold">2 FIVE-LEG</span>
-<p class="why">Lowe + Elly + Murakami + Bauers + Alvarez. Two of those games are already live.<br>Jensen + Yordan + Ohtani + Grichuk. Cruz is off this leg.</p></div>
+  <h2>Parlay card</h2>
+  <div class="card"><div class="name">5 straights</div><div class="legs">Lowe cashed.<br>Still ahead: Elly · Murakami, posted · Bauers, blank · Alvarez is live and late with no homer.</div></div>
+  <div class="card"><div class="name">3 two-leg</div><div class="legs">Lowe + Elly. Lowe already hit. Elly has not.<br>Murakami + Bauers. Murakami posted, Bauers blank.<br>Lowe + Cruz. Dead. Cruz is out.</div></div>
+  <div class="card"><div class="name">3 three-leg</div><div class="legs">Lowe + Elly + Murakami.<br>Bauers + Alvarez + Ohtani. Alvarez is in the 9th inning of a 7–1 game.<br>Jensen + Yordan + Grichuk. Jensen and Grichuk are posted. Yordan is not.</div></div>
+  <div class="card"><div class="name">3 four-leg</div><div class="legs">Lowe + Elly + Murakami + Bauers.<br>Alvarez + Jensen + Yordan + Ohtani.<br>Suárez + Gelof + Saggese. Cruz is off this leg.</div></div>
+  <div class="card"><div class="name">2 five-leg</div><div class="legs">Lowe + Elly + Murakami + Bauers + Alvarez.<br>Jensen + Yordan + Ohtani + Grichuk. Cruz is off this leg.</div></div>
+
+  <h2>Source desk</h2>
+  <div class="card">
+    <div class="src"><span class="ok">IN</span> Typed house board · Venom ranks on that sheet · Viper · SP A+ · Kasper · POTD · Payoff · LaFemillie · Zone · rudebets · bbrown · HR King · HRPredict · CashMan · GOATed</div>
+    <div class="src"><span class="miss">DARK</span> jakevenomapp · Joey · ParlayBarry · Charm · BarrelLab · DFS Donuts</div>
+    <div class="src"><span class="warn">NOTE</span> One gold straight, and it is Elly. Jensen is crowd only. Fade SEA. kHR did not add a source.</div>
+  </div>
+  <footer>Persist 926-pub-v1 · 2:05 PM CT. Graded as typed tickets only. Hit = a home run by that batter today. Not betting advice.</footer>
 </div>
-<p class="muted">Persist 926-khr-v1 · 1:05 PM CT. kHR did not change the typed tickets. It killed the Cruz leg and the Emmanuel leg.</p>
-</section>
-</div>
-<script>
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-    btn.classList.add('on');
-    document.getElementById(btn.dataset.p).classList.add('on');
-  };
-});
-</script>
-</body></html>
+</body>
+</html>
