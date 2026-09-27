@@ -2,144 +2,176 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Properating Room</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" />
 <style>
-  :root {
-    --bg: #070b14; --navy: #0e1730; --card: #121c38; --gold: #d4af37; --gold2: #f3d57a;
-    --green: #3dd68c; --blue: #5aa7ff; --red: #ff6b6b; --muted: #8b97b3; --text: #f4f6fb;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; font-family: "Segoe UI", system-ui, sans-serif; color: var(--text);
-    background:
-      radial-gradient(900px 280px at 20% -10%, rgba(243,213,122,.18), transparent 55%),
-      radial-gradient(700px 240px at 85% -5%, rgba(255,255,255,.07), transparent 50%),
-      var(--bg);
-    padding: 16px 12px 48px;
-  }
-  .wrap { max-width: 980px; margin: 0 auto; }
-  .hdr { border: 1px solid rgba(212,175,55,.45); background: linear-gradient(180deg, #182448, #0d152c); border-radius: 16px; padding: 16px 18px 14px; margin-bottom: 14px; }
-  .kicker { color: var(--gold); letter-spacing: .18em; font-size: 11px; font-weight: 700; }
-  h1 { margin: 6px 0 4px; font-size: 28px; background: linear-gradient(180deg, #fff6c8, #d4af37); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .sub { color: var(--muted); font-size: 13px; line-height: 1.4; }
-  h2 { margin: 18px 0 8px; font-size: 13px; letter-spacing: .14em; color: var(--gold2); text-transform: uppercase; }
-  .grid { display: grid; gap: 8px; }
-  .g2 { grid-template-columns: 1fr; }
-  @media (min-width: 720px) { .g2 { grid-template-columns: 1fr 1fr; } }
-  .card { background: var(--card); border: 1px solid rgba(212,175,55,.35); border-radius: 14px; padding: 10px 12px; }
-  .name { font-weight: 800; font-size: 15px; }
-  .meta { color: var(--muted); font-size: 11px; margin-top: 3px; line-height: 1.35; }
-  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; padding: 2px 6px; border-radius: 999px; margin-right: 4px; }
-  .gold { background: rgba(212,175,55,.2); color: var(--gold2); }
-  .green { background: rgba(61,214,140,.16); color: var(--green); }
-  .blue { background: rgba(90,167,255,.16); color: var(--blue); }
-  .fade { background: rgba(255,107,107,.14); color: var(--red); }
-  .crowd { background: rgba(243,213,122,.12); color: var(--gold2); }
-  .game { display: grid; grid-template-columns: 108px 1fr; gap: 8px; align-items: start; }
-  .when { color: var(--gold2); font-size: 11px; font-weight: 700; }
-  .vs { font-size: 12px; font-weight: 800; }
-  .src { font-size: 11px; color: var(--muted); margin-top: 4px; }
-  .ok { color: var(--green); } .miss { color: #6b7388; } .warn { color: #ffb347; }
-  .legs { color: var(--muted); font-size: 12px; margin-top: 4px; line-height: 1.45; }
-  footer { margin-top: 16px; color: #6b7388; font-size: 11px; line-height: 1.45; }
-  .dead { opacity: .55; }
+:root { --ink:#070b14; --court:#0a101c; --panel:#0d1528; --raised:#152038; --ivory:#e4e0d4; --mute:#9a978c; --faint:#6e6c64; --gold:#c4a574; --goldhi:#e8d5a3; --pine:#7d9a78; --ice:#7aa2c8; --brick:#c17a6c; --line:rgba(228,224,212,.14); }
+*{box-sizing:border-box} body{margin:0;font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--ivory);background:radial-gradient(ellipse 55% 32% at 14% -6%,rgba(232,213,163,.16),transparent 55%),radial-gradient(ellipse 55% 32% at 86% -6%,rgba(232,213,163,.1),transparent 50%),linear-gradient(180deg,#0a1224,#070b14 46%,#05070d)}
+.wrap{max-width:72rem;margin:0 auto;padding:20px 16px 64px}
+.hdr{border:1px solid rgba(196,165,116,.5);background:rgba(10,16,28,.85);border-radius:24px;padding:16px}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+h1{margin:6px 0 0;font-size:32px;letter-spacing:-.04em;color:var(--goldhi);text-shadow:0 1px 0 #8a7340,0 2px 0 #6e5a32,0 3px 10px rgba(0,0,0,.55)}
+.sub{color:var(--mute);font-size:14px;line-height:1.5;max-width:40rem}
+.row{display:flex;gap:8px;overflow:auto;margin-top:14px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:transparent}
+.pill{min-height:44px;border-radius:999px;padding:0 16px;background:var(--raised);font-weight:600;white-space:nowrap}
+.pill.on{background:var(--goldhi);color:var(--ink)}
+.tabs{display:flex;gap:8px;overflow:auto;margin:12px 0}
+.tab{min-height:44px;border-radius:999px;padding:0 14px;color:var(--mute)}
+.tab.on{background:var(--raised);color:var(--goldhi)}
+.grid{display:grid;gap:8px}
+@media(min-width:720px){.grid.cards{grid-template-columns:1fr 1fr}.grid.games{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.grid.cards{grid-template-columns:1fr 1fr 1fr}.grid.games{grid-template-columns:1fr 1fr 1fr}}
+.card{text-align:left;width:100%;border-radius:16px;background:var(--panel);border:1px solid var(--line);padding:12px;min-height:64px}
+.card.g6{border-color:var(--gold)}.card.g5{border-color:var(--pine)}.card.g4{border-color:var(--ice)}
+.face{display:flex;gap:10px;align-items:flex-start}
+.logo{width:32px;height:32px;object-fit:contain}
+.name{font-weight:650;font-size:16px}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.spot{color:var(--faint);font-size:13px;margin-top:4px}
+.chip{display:inline-block;border-radius:999px;padding:2px 8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.hit{background:rgba(125,154,120,.16);color:var(--pine)}.miss{background:var(--raised);color:var(--mute)}.out{background:rgba(193,122,108,.16);color:var(--brick)}.gold{background:rgba(232,213,163,.14);color:var(--goldhi)}
+.sec{margin:18px 0 8px}
+h2{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--goldhi);margin:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.wait{background:var(--raised);border:1px solid rgba(196,165,116,.4);color:var(--goldhi);border-radius:12px;padding:12px;font-size:14px}
+.drawer{position:fixed;inset:0;background:rgba(7,11,20,.72);display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--court);border:1px solid var(--line);border-radius:24px 24px 0 0;padding:18px;width:min(100%,32rem);max-height:88vh;overflow:auto}
+.src{background:var(--panel);border-radius:12px;padding:8px 12px;margin-top:6px}
+.hidden{display:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="hdr">
-    <div class="kicker">HOUSE BOARD · FINAL WEEKEND</div>
+  <header class="hdr">
+    <div class="kicker">House board</div>
     <h1>The Properating Room</h1>
-    <div class="sub">Sat 9/26 · published 2:05 PM CT · persist 926-pub-v1<br>Typed tickets, then the live card. Lowe has homered. Cruz is out. Emmanuel is out. kHR is tape, not A+.</div>
+    <p class="sub">Sunday 9/27 is holding. Saturday 9/26 is graded. Player cards open when you tap a name. Sport desks stay in the bar even when they are dark.</p>
+    <div class="row" id="sports"></div>
+  </header>
+  <div id="mlb">
+    <div class="row" id="days"></div>
+    <div class="tabs" id="tabs"></div>
+    <div id="view"></div>
   </div>
-
-  <h2>Layer A playable</h2>
-  <div class="grid g2">
-    <div class="card dead">
-      <div class="name">Brandon Lowe <span class="tag green">CASHED</span></div>
-      <div class="meta">PIT 2, vs Verlander. 1 HR already. Game is top 6, PIT 2–0. V1 is off the remaining board.</div>
-    </div>
-    <div class="card">
-      <div class="name">Elly De La Cruz <span class="tag gold">GOLD</span><span class="tag gold">V2 VALUE</span></div>
-      <div class="meta">CIN 2 vs Yesavage. Warmup. Only gold-row straight. Roof.</div>
-    </div>
-    <div class="card">
-      <div class="name">Munetaka Murakami <span class="tag gold">V3</span></div>
-      <div class="meta">Posted CWS 4 vs Quintana. 7:10 ET. GOATed 25% · CashMan 27%.</div>
-    </div>
-    <div class="card">
-      <div class="name">Jake Bauers <span class="tag gold">V4</span></div>
-      <div class="meta">STL @ MIL still blank. vs Mathews, 7:10 ET. Roof.</div>
-    </div>
-    <div class="card dead">
-      <div class="name">Francisco Alvarez <span class="tag fade">LIVE LATE</span></div>
-      <div class="meta">NYM 7. Game is top 9, NYM 7–1. No homer. Ewing and Mauricio (2) have homered.</div>
-    </div>
-    <div class="card">
-      <div class="name">Shohei Ohtani <span class="tag green">V6 DUE</span><span class="tag green">VIPER</span></div>
-      <div class="meta">Posted LAD 2 vs Wilkinson. 4:05 ET. kHR only 61.3. Betts is 1.</div>
-    </div>
-    <div class="card dead">
-      <div class="name">Eduardo Valencia <span class="tag green">LIVE</span></div>
-      <div class="meta">DET 4, no homer through top 6. Viper / SP TB A+. Tape now.</div>
-    </div>
-    <div class="card">
-      <div class="name">Thomas Saggese <span class="tag green">V11 VALUE</span><span class="tag green">VIPER</span></div>
-      <div class="meta">STL @ MIL still blank. vs May. 25% brl · 18 without.</div>
-    </div>
-    <div class="card">
-      <div class="name">Carter Jensen <span class="tag gold">GOLD</span><span class="tag crowd">CROWD</span></div>
-      <div class="meta">Posted KC 1 vs Bibee. Venom 209. Not a Layer A straight. Pasquantino is KC 5. CLE still blank.</div>
-    </div>
-    <div class="card dead">
-      <div class="name">Oneil Cruz <span class="tag fade">OUT</span></div>
-      <div class="meta">Not on the PIT card. Mangum is batting fourth. Every Cruz leg is dead.</div>
-    </div>
-  </div>
-
-  <h2>Common names</h2>
-  <div class="card">
-    <div class="legs">
-      <span class="tag gold">GOLD</span> Elly, posted CIN 2 · Suárez, posted CIN 4 · Jensen, posted KC 1, crowd only · Burleson, lineup still blank<br>
-      <span class="tag green">GREEN</span> Cruz OUT · Yordan, HOU blank · Murakami, posted CWS 4 · Schwarber, PHI blank<br>
-      <span class="tag blue">BLUE</span> Bauers, blank · Torkelson, DET 7, game live, no homer · Grichuk, posted CWS 3
-    </div>
-    <div class="meta" style="margin-top:8px">Emmanuel Rodriguez is out of the MIN 1–9. Seager is posted TEX 3. Olson ATL 3 and Baldwin ATL 4 are posted.</div>
-  </div>
-
-  <h2>Game board · still ahead</h2>
-  <div class="grid">
-    <div class="card game dead"><div><div class="when">LIVE T9</div><div class="vs">NYM 7 @ WSH 1</div></div><div><div class="name">Alvarez no HR</div><div class="meta">Soto no HR. Mauricio 2, Ewing 1. Off the board.</div></div></div>
-    <div class="card game dead"><div><div class="when">LIVE T6</div><div class="vs">PIT 2 @ DET 0</div></div><div><div class="name">Lowe cashed</div><div class="meta">Cruz out. Valencia and Torkelson still 0. Gonzalez also homered.</div></div></div>
-    <div class="card game"><div><div class="when">WARMUP</div><div class="vs">CIN @ TOR</div></div><div><div class="name">Elly <span class="tag gold">GOLD</span></div><div class="name">Suárez <span class="tag crowd">CROWD</span></div><div class="meta">Lowder / Yesavage. Both posted, 2 and 4. kHR also likes Stewart, who is batting 3.</div></div></div>
-    <div class="card game"><div><div class="when">4:05 ET</div><div class="vs">LAD @ SF</div></div><div><div class="name">Ohtani</div><div class="name">Betts</div><div class="meta">Snell / Wilkinson. Posted 2 and 1. kHR is soft, 61 / 60 / 60. Poor HR park.</div></div></div>
-    <div class="card game"><div><div class="when">4:10 ET</div><div class="vs">TEX @ MIN</div></div><div><div class="name">Seager</div><div class="name">Rodriguez <span class="tag fade">OUT</span></div><div class="meta">Eovaldi / Ober. Rain 66%, wind in. Clemens is the kHR bat who is actually in.</div></div></div>
-    <div class="card game"><div><div class="when">4:10 ET</div><div class="vs">ATL @ MIA</div></div><div><div class="name">Olson</div><div class="name">Baldwin</div><div class="meta">Suter / Ralston. Posted 3 and 4. kHR prefers Riley and Acuña, who are 5 and 2.</div></div></div>
-    <div class="card game"><div><div class="when">7:10 ET</div><div class="vs">CLE @ KC</div></div><div><div class="name">Jensen <span class="tag crowd">CROWD</span></div><div class="name">Pasquantino</div><div class="meta">Bibee / Wacha. KC posted, CLE blank. Jensen KC 1, Pasquantino KC 5. Kauffman +6.1%.</div></div></div>
-    <div class="card game"><div><div class="when">7:10 ET</div><div class="vs">COL @ CWS</div></div><div><div class="name">Murakami</div><div class="name">Grichuk</div><div class="meta">Quintana / Martin. Both posted, CWS 4 and CWS 3. Wind in. Goodman stays parked.</div></div></div>
-    <div class="card game"><div><div class="when">7:10 ET</div><div class="vs">STL @ MIL</div></div><div><div class="name">Bauers</div><div class="name">Burleson <span class="tag crowd">CROWD</span></div><div class="meta">Mathews / May. Both sides blank. Roof. Saggese is the Viper, not the top 2.</div></div></div>
-    <div class="card game"><div><div class="when">7:15 ET</div><div class="vs">TB @ PHI</div></div><div><div class="name">Schwarber <span class="tag crowd">CROWD</span></div><div class="name">Aranda</div><div class="meta">Jax / TBA. Both blank. 23 mph in. kHR is the TB side, not Schwarber.</div></div></div>
-    <div class="card game"><div><div class="when">8:40 ET</div><div class="vs">AZ @ SD</div></div><div><div class="name">Tatis</div><div class="name">Carroll</div><div class="meta">Buehler only. AZ arm not confirmed. Both blank. kHR is Merrill, Machado, Tatis.</div></div></div>
-    <div class="card game"><div><div class="when">9:40 ET</div><div class="vs">HOU @ ATH</div></div><div><div class="name">Yordan <span class="tag crowd">CROWD</span></div><div class="name">Gelof</div><div class="meta">Wesneski / Perkins. Both blank. Sutter +10.9%, best weather. kHR also has Langeliers and Paredes.</div></div></div>
-    <div class="card game"><div><div class="when">9:40 ET</div><div class="vs">LAA @ SEA</div></div><div><div class="name">Trout</div><div class="name">Raleigh <span class="tag fade">FADE SEA</span></div><div class="meta">Johnson / Anderson. Both blank. Trout is the slate’s top kHR bat at 88.8. Roof, env −26%.</div></div></div>
-  </div>
-
-  <h2>Parlay card</h2>
-  <div class="card"><div class="name">5 straights</div><div class="legs">Lowe cashed.<br>Still ahead: Elly · Murakami, posted · Bauers, blank · Alvarez is live and late with no homer.</div></div>
-  <div class="card"><div class="name">3 two-leg</div><div class="legs">Lowe + Elly. Lowe already hit. Elly has not.<br>Murakami + Bauers. Murakami posted, Bauers blank.<br>Lowe + Cruz. Dead. Cruz is out.</div></div>
-  <div class="card"><div class="name">3 three-leg</div><div class="legs">Lowe + Elly + Murakami.<br>Bauers + Alvarez + Ohtani. Alvarez is in the 9th inning of a 7–1 game.<br>Jensen + Yordan + Grichuk. Jensen and Grichuk are posted. Yordan is not.</div></div>
-  <div class="card"><div class="name">3 four-leg</div><div class="legs">Lowe + Elly + Murakami + Bauers.<br>Alvarez + Jensen + Yordan + Ohtani.<br>Suárez + Gelof + Saggese. Cruz is off this leg.</div></div>
-  <div class="card"><div class="name">2 five-leg</div><div class="legs">Lowe + Elly + Murakami + Bauers + Alvarez.<br>Jensen + Yordan + Ohtani + Grichuk. Cruz is off this leg.</div></div>
-
-  <h2>Source desk</h2>
-  <div class="card">
-    <div class="src"><span class="ok">IN</span> Typed house board · Venom ranks on that sheet · Viper · SP A+ · Kasper · POTD · Payoff · LaFemillie · Zone · rudebets · bbrown · HR King · HRPredict · CashMan · GOATed</div>
-    <div class="src"><span class="miss">DARK</span> jakevenomapp · Joey · ParlayBarry · Charm · BarrelLab · DFS Donuts</div>
-    <div class="src"><span class="warn">NOTE</span> One gold straight, and it is Elly. Jensen is crowd only. Fade SEA. kHR did not add a source.</div>
-  </div>
-  <footer>Persist 926-pub-v1 · 2:05 PM CT. Graded as typed tickets only. Hit = a home run by that batter today. Not betting advice.</footer>
+  <div id="other" class="hidden"></div>
 </div>
+<div id="drawer" class="hidden"></div>
+<script>
+const TEAMS={ARI:109,ATL:144,BAL:110,BOS:111,CHC:112,CHW:145,CIN:113,CLE:114,COL:115,DET:116,HOU:117,KC:118,LAA:108,LAD:119,MIA:146,MIL:158,MIN:142,NYM:121,NYY:147,ATH:133,PHI:143,PIT:134,SD:135,SEA:136,SF:137,STL:138,TB:139,TEX:140,TOR:141,WSH:120};
+const P=[
+["ellydelacruz","Elly De La Cruz","De La Cruz","CIN","6+","Kasper, POTD, Payoff, LaFemillie, Zone, bbrown, HR King","GOLD, V2, VALUE","CIN 2 vs Yesavage","Only gold-row straight. Final, no home run.","miss"],
+["eugeniosuarez","Eugenio Suárez","Suárez","CIN","6+","Kasper, POTD, Payoff, LaFemillie, Zone, bbrown","GOLD, CROWD","CIN 4 vs Yesavage","Final, no home run.","miss"],
+["carterjensen","Carter Jensen","Jensen","KC","6+","Kasper, POTD, Payoff, Zone, rudebets, bbrown","GOLD, CROWD, SP A+","KC 1 vs Bibee","Venom 209. Crowd only. Final, no home run.","miss"],
+["alecburleson","Alec Burleson","Burleson","STL","6+","Kasper, POTD, Payoff, LaFemillie, Zone, rudebets","GOLD, CROWD","STL 3 vs May","Home run. Milwaukee won 3-2.","hit"],
+["yordanalvarez","Yordan Alvarez","Alvarez","HOU","5","Kasper, POTD, Payoff, Zone, bbrown","GREEN, CROWD","HOU 2 vs Perkins","Home run at Sutter. Houston won 13-2.","hit"],
+["munetakamurakami","Munetaka Murakami","Murakami","CHW","5","Kasper, POTD, Payoff, Zone, HRPredict","V3","CHW 4 vs Quintana","Final, no home run.","miss"],
+["kyleschwarber","Kyle Schwarber","Schwarber","PHI","5","Kasper, POTD, Payoff, Zone, HRPredict","GREEN, CROWD","PHI 2 vs Jax","Final, no home run. Tampa Bay won 12-1.","miss"],
+["oneilcruz","Oneil Cruz","Cruz","PIT","5","Kasper, POTD, LaFemillie, Zone, bbrown","SP A+, OUT","Not on the Pittsburgh card","Scratched before first pitch.","out"],
+["jakebauers","Jake Bauers","Bauers","MIL","4","Kasper, POTD, Payoff, LaFemillie","V4","MIL 3 vs Mathews","Final, no home run.","miss"],
+["spencertorkelson","Spencer Torkelson","Torkelson","DET","4","Payoff, LaFemillie, Zone, Kalshi","","DET 7 vs Yates","Final, no home run.","miss"],
+["randalgrichuk","Randal Grichuk","Grichuk","CHW","4","Kasper, POTD, Payoff, HR King","","CHW 3 vs Quintana","Final, no home run.","miss"],
+["brandonlowe","Brandon Lowe","Lowe","PIT","2","Venom, SP","V1, VALUE, SP A+","PIT 2 vs Verlander","Home run. Detroit won 4-3.","hit"],
+["franciscoalvarez","Francisco Alvarez","Alvarez","NYM","2","Venom","V5, VALUE","NYM 7 vs Early","Final, no home run. Mets won 7-1.","miss"],
+["shoheiohtani","Shohei Ohtani","Ohtani","LAD","2","Venom","V6, DUE, VIPER","LAD 2 vs Wilkinson","Final, no home run. Betts homered.","miss"],
+["eduardovalencia","Eduardo Valencia","Valencia","DET","2","Venom","V8, VALUE, VIPER","DET 4 vs Yates","Home run.","hit"],
+["thomassaggese","Thomas Saggese","Saggese","STL","2","Venom","V11, VALUE, VIPER","STL 8 vs May","Final, no home run.","miss"],
+["mookiebetts","Mookie Betts","Betts","LAD","2","Board","TOP 2","LAD 1 vs Wilkinson","Home run. Dodgers won 4-3.","hit"],
+["drakebaldwin","Drake Baldwin","Baldwin","ATL","2","Board","TOP 2","ATL 4 vs Ralston","Home run. Atlanta won 8-3.","hit"],
+["coreyseager","Corey Seager","Seager","TEX","2","Board","TOP 2","TEX 3 vs Ober","Final, no home run. Emmanuel Rodriguez was out.","miss"],
+["mattolson","Matt Olson","Olson","ATL","2","Board","TOP 2","ATL 3 vs Ralston","Final, no home run.","miss"],
+["vinniepasquantino","Vinnie Pasquantino","Pasquantino","KC","2","Board","TOP 2","KC 5 vs Bibee","Final, no home run. Cleveland won 11-5.","miss"],
+["fernandotatisjr","Fernando Tatis Jr.","Tatis","SD","2","Board","TOP 2","SD 1 vs Clarke","Final, no home run. San Diego won 10-7.","miss"],
+["corbincarroll","Corbin Carroll","Carroll","ARI","2","Board","TOP 2","ARI 5 vs Buehler","Final, no home run.","miss"],
+["zackgelof","Zack Gelof","Gelof","ATH","2","Board","TOP 2","ATH 5 vs Wesneski","Final, no home run.","miss"],
+["miketrout","Mike Trout","Trout","LAA","2","Board","TOP 2","LAA 2 vs Anderson","Final, no home run. Seattle won 8-4.","miss"],
+["calraleigh","Cal Raleigh","Raleigh","SEA","2","Board","FADE","SEA 4 vs Johnson","Best Mariner bat. Park was the fade. Final, no home run.","miss"],
+["juansoto","Juan Soto","Soto","NYM","2","Board","TOP 2","NYM 2 vs Early","Final, no home run.","miss"],
+["jonathanaranda","Jonathan Aranda","Aranda","TB","2","Board","TOP 2","TB 2 vs Nola","Final, no home run.","miss"]
+];
+const players=P.map(r=>({key:r[0],name:r[1],last:r[2],team:r[3],bucket:r[4],sources:r[5].split(", ").filter(Boolean),tags:r[6].split(", ").filter(Boolean),spot:r[7],note:r[8],grade:r[9]}));
+const by=Object.fromEntries(players.map(p=>[p.key,p]));
+const games=[
+["NYM","WSH","12:35 PM","","franciscoalvarez","juansoto","NYM 7-1"],
+["PIT","DET","1:10 PM","FADE","brandonlowe","oneilcruz","DET 4-3"],
+["CIN","TOR","3:07 PM","","ellydelacruz","eugeniosuarez","CIN 5-1"],
+["LAD","SF","4:05 PM","FADE","shoheiohtani","mookiebetts","LAD 4-3"],
+["TEX","MIN","4:10 PM","FADE","coreyseager","","TEX 6-2"],
+["ATL","MIA","4:10 PM","TARGET","mattolson","drakebaldwin","ATL 8-3"],
+["CLE","KC","7:10 PM","TARGET","carterjensen","vinniepasquantino","CLE 11-5"],
+["COL","CHW","7:10 PM","FADE","munetakamurakami","randalgrichuk","COL 9-6"],
+["STL","MIL","7:10 PM","","jakebauers","alecburleson","MIL 3-2"],
+["TB","PHI","7:15 PM","FADE","kyleschwarber","jonathanaranda","TB 12-1"],
+["ARI","SD","8:40 PM","","fernandotatisjr","corbincarroll","SD 10-7"],
+["HOU","ATH","9:40 PM","TARGET","yordanalvarez","zackgelof","HOU 13-2"],
+["LAA","SEA","9:40 PM","FADE","miketrout","calraleigh","SEA 8-4"]
+];
+const sun=[["NYM","WSH","1:05 PM","Manaea / Herz"],["BAL","NYY","1:05 PM","Baz / Rodriguez"],["CHC","BOS","3:05 PM","Imanaga / TBA"],["HOU","ATH","3:05 PM","Lambert / Johnson"],["LAD","SF","3:05 PM","TBA / Seymour"],["TB","PHI","3:05 PM","Martinez / Wheeler"],["CIN","TOR","3:07 PM","Williamson / Scherzer"],["CLE","KC","3:10 PM","Messick / Lynch"],["PIT","DET","3:10 PM","Jones / Ryan"],["ARI","SD","3:10 PM","Soroka / Vasquez"],["LAA","SEA","3:10 PM","Kikuchi / Gilbert"],["TEX","MIN","3:10 PM","Gore / Kremer"],["COL","CHW","3:10 PM","Freeland / Kay"],["ATL","MIA","3:10 PM","Ritchie / Junk"],["STL","MIL","3:10 PM","Pallante / Misiorowski"]];
+const parlays=[
+["5 straights",[["brandonlowe"],["ellydelacruz"],["munetakamurakami"],["jakebauers"],["franciscoalvarez"]]],
+["3 two-leg",[["brandonlowe","ellydelacruz"],["munetakamurakami","jakebauers"],["brandonlowe","oneilcruz"]]],
+["3 three-leg",[["brandonlowe","ellydelacruz","munetakamurakami"],["jakebauers","franciscoalvarez","shoheiohtani"],["carterjensen","yordanalvarez","randalgrichuk"]]],
+["3 four-leg",[["brandonlowe","ellydelacruz","munetakamurakami","jakebauers"],["franciscoalvarez","carterjensen","yordanalvarez","shoheiohtani"],["eugeniosuarez","zackgelof","thomassaggese"]]],
+["2 five-leg",[["brandonlowe","ellydelacruz","munetakamurakami","jakebauers","franciscoalvarez"],["carterjensen","yordanalvarez","shoheiohtani","randalgrichuk"]]]
+];
+let sport="MLB", day="sat", tab="Cards";
+const logo=a=>`https://www.mlbstatic.com/team-logos/team-cap-on-dark/${TEAMS[a]}.svg`;
+const chip=g=>`<span class="chip ${g}">${g==="hit"?"HR":g==="out"?"OUT":"MISS"}</span>`;
+function card(p){const b=p.bucket==="6+"?"g6":p.bucket==="5"?"g5":p.bucket==="4"?"g4":"";return `<button class="card ${b}" data-key="${p.key}"><div class="face"><img class="logo" alt="" src="${logo(p.team)}"><div style="flex:1;min-width:0"><div class="top"><span class="name">${p.last}</span>${chip(p.grade)}</div><div class="meta">${p.team} · ${p.bucket==="2"?"board":p.bucket+" src"}</div><div class="spot">${p.spot}</div></div></div></button>`}
+function paint(){
+  document.getElementById("sports").innerHTML=["MLB","NBA","NFL","SURVIVOR"].map(s=>`<button class="pill ${sport===s?"on":""}" data-sport="${s}">${s}</button>`).join("");
+  const mlb=sport==="MLB";
+  document.getElementById("mlb").classList.toggle("hidden",!mlb);
+  document.getElementById("other").classList.toggle("hidden",mlb);
+  if(!mlb){
+    const copy=sport==="NBA"?"NBA tickets are dark. No Sunday sheet has been staged.":sport==="NFL"?"NFL laser is dark. Sunday locks have not been pasted.":"Survivor board is dark. No week card is staged.";
+    document.getElementById("other").innerHTML=`<div class="panel" style="margin-top:16px"><div class="kicker">${sport}</div><h2 style="font-family:IBM Plex Sans,sans-serif;font-size:24px;letter-spacing:0;text-transform:none;margin-top:8px">Desk dark</h2><p class="sub">${copy}</p></div>`;
+    return;
+  }
+  document.getElementById("days").innerHTML=[["sun","Sun 9/27 hold"],["sat","Sat 9/26 tape"]].map(([k,l])=>`<button class="pill ${day===k?"on":""}" data-day="${k}">${l}</button>`).join("");
+  document.getElementById("tabs").classList.toggle("hidden", day!=="sat");
+  document.getElementById("tabs").innerHTML=["Consensus","Game Board","Parlay","Cards","Tape"].map(t=>`<button class="tab ${tab===t?"on":""}" data-tab="${t}">${t}</button>`).join("");
+  const view=document.getElementById("view");
+  if(day==="sun"){
+    view.innerHTML=`<div class="panel"><div class="kicker">Holding Sunday 9/27</div><h2 style="font-family:IBM Plex Sans,sans-serif;font-size:24px;letter-spacing:0;text-transform:none;margin-top:8px">No tickets yet</h2><p class="sub">Fifteen games are on the slate. Venom, A+, Kasper, and the typed handles have not landed. No names are minted.</p></div><div class="grid cards" style="margin-top:8px">${["Venom 1-20","Viper","SportsPredict A+","Kasper 1-3","Payoff","POTDJay"].map(f=>`<div class="wait">Waiting · ${f}</div>`).join("")}</div><div class="grid games" style="margin-top:8px">${sun.map(g=>`<article class="panel"><div class="face"><img class="logo" alt="" src="${logo(g[0])}"><b>${g[0]}</b><span style="color:var(--faint)">@</span><img class="logo" alt="" src="${logo(g[1])}"><b>${g[1]}</b></div><div class="meta">${g[2]} ET · ${g[3]}</div><div class="spot">Lineups not posted.</div></article>`).join("")}</div>`;
+    return;
+  }
+  if(tab==="Cards"||tab==="Consensus"){
+    const order=tab==="Consensus"?["6+","5","4"]:["6+","5","4","2"];
+    const hits=players.filter(p=>p.grade==="hit");
+    view.innerHTML=(tab==="Consensus"?`<div class="sec"><h2>Saturday cashed</h2></div><div class="grid cards">${hits.map(card).join("")}</div>`:"")+order.map(b=>{
+      const rows=players.filter(p=>p.bucket===b);
+      if(!rows.length) return "";
+      const title=b==="6+"?"6+ gold":b==="2"?"Board names":b+" sources";
+      return `<div class="sec"><h2>${title}</h2></div><div class="grid cards">${rows.map(card).join("")}</div>`;
+    }).join("")+(tab==="Consensus"?`<p class="spot">Gold-row max was De La Cruz. It missed. Tap any card.</p>`:"");
+  } else if(tab==="Game Board"){
+    view.innerHTML=`<div class="grid games">${games.map(g=>{
+      const a=by[g[4]], b=g[5]?by[g[5]]:null;
+      return `<article class="panel" style="border-color:${g[3]==="TARGET"?"var(--gold)":g[3]==="FADE"?"var(--brick)":"var(--line)"}"><div class="top"><span class="kicker">Top 2</span>${g[3]?`<span class="chip gold">${g[3]}</span>`:""}</div><div class="face" style="margin-top:8px"><img class="logo" alt="" src="${logo(g[0])}"><b>${g[0]}</b> @ <img class="logo" alt="" src="${logo(g[1])}"><b>${g[1]}</b></div><div class="meta">${g[2]} ET · ${g[6]}</div><div style="margin-top:8px">${card(a)}${b?`<div style="height:8px"></div>${card(b)}`:""}</div></article>`;
+    }).join("")}</div>`;
+  } else if(tab==="Parlay"){
+    view.innerHTML=parlays.map(([label,legs])=>`<article class="panel" style="margin-bottom:8px"><h2>${label}</h2>${legs.map(leg=>`<div class="row">${leg.map(k=>{const p=by[k];return `<button class="pill" data-key="${k}"><img class="logo" alt="" src="${logo(p.team)}" style="width:20px;height:20px;vertical-align:middle"> ${p.last} ${chip(p.grade)}</button>`}).join("")}</div>`).join("")}</article>`).join("")+`<p class="spot">Cruz legs are dead.</p>`;
+  } else {
+    view.innerHTML=`<article class="panel"><h2>What counted</h2><p class="sub">Saturday grades use the typed house board plus the final box scores. A hit is a home run by that batter. kHR never minted A+.</p></article><article class="panel" style="margin-top:8px"><h2>Sunday</h2><p class="sub">Fifteen games. Probables only. No batter is on a ticket until a feed is pasted.</p></article>`;
+  }
+}
+function openCard(key){
+  const p=by[key]; if(!p) return;
+  document.getElementById("drawer").className="drawer";
+  document.getElementById("drawer").innerHTML=`<div class="sheet"><div class="top"><div><div class="kicker">${p.team}</div><h2 style="font-family:IBM Plex Sans,sans-serif;font-size:28px;letter-spacing:0;text-transform:none">${p.last}</h2><div class="spot">${p.name}</div></div><button id="close" class="pill">Close</button></div><div style="margin-top:10px">${chip(p.grade)} ${p.tags.map(t=>`<span class="chip gold">${t}</span>`).join(" ")}</div><p>${p.note}</p><div class="meta">${p.spot}</div><h2 style="margin-top:16px">Sources</h2>${p.sources.map(s=>`<div class="src">${s}</div>`).join("")}</div>`;
+  document.getElementById("close").onclick=()=>{document.getElementById("drawer").className="hidden";};
+  document.getElementById("drawer").onclick=e=>{if(e.target.id==="drawer") document.getElementById("drawer").className="hidden";};
+}
+document.body.addEventListener("click",e=>{
+  const s=e.target.closest("[data-sport]"); if(s){sport=s.dataset.sport;paint();return;}
+  const d=e.target.closest("[data-day]"); if(d){day=d.dataset.day;paint();return;}
+  const t=e.target.closest("[data-tab]"); if(t){tab=t.dataset.tab;paint();return;}
+  const k=e.target.closest("[data-key]"); if(k) openCard(k.dataset.key);
+});
+paint();
+</script>
 </body>
 </html>
